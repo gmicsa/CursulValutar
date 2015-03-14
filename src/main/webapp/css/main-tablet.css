@@ -1,0 +1,52 @@
+/* 
+    Document   : main-tablet
+    Created on : 09.10.2012, 22:11:34
+    Author     : Alex
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@media screen and (max-width:800px) and (min-width:481px)
+{
+        .mainContent {
+	    margin-left: 0;
+	    margin-right: 0;
+	    width: 100%;
+	}
+	#datepickerPanel{
+		display: block;
+	}
+
+	#currencypickerPanel{
+		display: block;
+	}
+
+	#buttonsPanel{
+		display: block;
+	}
+	#datepicker {
+		width: 250px;
+	}
+	#currencypicker {
+		width: 256px;
+	}
+	.redSmall{
+	    font-size: 12px;
+	    color: red;
+	    display: block;
+	    padding-left: 0px;
+	}
+	.greenSmall{
+	    font-size: 12px;
+	    color: green;
+	    display: block;
+	    padding-left: 0px;
+	}
+	.hoverLink {
+	    cursor: hand;
+	    cursor: pointer;
+	    padding-left: 0px;
+	    display: block;
+	}
+}
+

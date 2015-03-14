@@ -1,0 +1,67 @@
+{
+    "app": {
+        "title": "CursRapid.ro",
+        "moto": "Afli rapid cursul...",
+        "alerts_description": "Definește o alertă",
+        "about": "<ul><li>Aceasta aplicatie prezinta cursul de schimb valutar de vanzare/cumparare pentru toate bancile din Romania si cursul de referinta BNR incepand cu 1 Martie 2012.</li><li>10 valute incluzand euro, dolar, lira si francul elvetian.</li><li>Grafic cu cursul pe ultimele 10 zile si estimare evolutie viitoare pe baza valorilor din trecut.</li><li>Cursurile valutare sunt preluate zilnic de pe site-urile bancilor, la intervale regulate de 2 ore, intre 8 si 18.</li><li>Cursurile valutare afisate sunt informative si in unele cazuri este posibil sa nu corespunda cu cursurile reale de la casa de schimb.</li><li>Pentru HUF si JPY, sunt afisate cursurile de schimb pentru 100 de unitati.</li><li>Contact: <a href='mailto:admin@cursrapid.ro'>admin@cursrapid.ro</a></li></ul>",
+        "about_title": "Informaţii despre aplicaţie",
+        "reference_bnr": "Curs de referință BNR: ",
+        "date_select": "Selectează data: ",
+        "currency_select": "Selectează moneda: ",
+        "transaction_select": "Selectează tranzacția: ",
+        "bank_select": "Selectează banca:",
+        "sell" : "Vanzare",
+        "buy" : "Cumparare",
+        "welcome": "Bine ai venit "
+    },
+    "button":{
+        "show": "Afişează",
+        "save": "Salveaza alerta",
+        "about": "Despre",
+        "history" : "Istoric",
+        "history_tooltip": "Afișează istoricul pentru ultimele 10 zile",
+        "loginFacebook":"Logare cu Facebook",
+        "logout":"Deconectare",
+        "alerts":"Alerte"
+    },
+    "column":{
+        "bank": "Banca",
+        "sell": "Curs vânzare",
+        "buy" : "Curs cumpărare",
+        "last_update" : "Ultima actualizare"
+    },
+    "error":{
+        "error" : "Eroare",
+        "info": "Informație",
+        "request_error" : "Eroare la procesarea cererii. Vă rugăm reveniți.",
+        "no_rates_found" : "Nu au fost găsite rate de schimb pentru data selectata.",
+        "bad_date" : "Format incorect pentru dată.",
+        "weekend": "În weekenduri nu sunt înregistrate cursuri valutare, alegeți o zi a săptămânii.",
+        "start" : "Cursurile valutare sunt înregistrate începând cu 1 martie 2012.",
+        "invalid_value" : "Va rugam adaugati o valoare valida in RON"
+    },
+    "graphic": {
+        "appraisal" : "Estimare",
+        "exchange" : "Cursul valutar",
+        "description" : "Graficul pe 10 zile in ",
+        "appraisal-future" : "Estimare evolutie viitoare",
+        "sell" : "Vanzare",
+        "buy" : "Cumparare",
+        "history" : "Istoricul ",
+        "info-display" : "Graficul poate fi vizualizat doar in modul landscape."
+    },
+    "alerts":{
+        "info": "Seteaza prima ta alerta",
+        "send_alert": "Trimite-mi un e-mail atunci cand cursul de schimb ",
+        "than": "cu",
+        "greater_equal" : "mai mare sau egal",
+        "less_equal": "mai mic sau egal",
+        "active" : "Alerta este activa ",
+        "request_ok" : "Alerta a fost salvata cu succes.",
+        "currency_select": "pentru moneda ",
+        "transaction_select": "pentru tranzacția ",
+        "bank_select": "al băncii ",
+        "gets": "este "
+
+    }
+}

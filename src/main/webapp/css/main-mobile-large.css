@@ -1,0 +1,133 @@
+/* 
+    Document   : main-mobile-large
+    Created on : 19.09.2012, 21:45:55
+    Author     : Alex
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@media screen and (max-width:480px) and (min-width:401px)
+{
+	body{
+		margin : 0;
+	}
+
+	.lastColumn{
+		display: none;
+	}
+	#siteTitlePanel {
+		padding-left: 0px;
+	}
+	.mainContent {
+		margin-left: 0%;
+		margin-right: 0%;
+		width: 100%;
+	}
+	#datepicker {
+		width: 98%;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-bottom: 10px;
+		display: block;
+	}
+	#currencypicker {
+		width: 100%;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-bottom: 10px;
+		display: block;
+	}
+        #datepickerPanel{
+            display: block;
+        }
+
+        #currencypickerPanel{
+            display: block;
+        }
+
+        #buttonsPanel{
+            display: block;
+        }
+	.redSmall{
+	    font-size: 12px;
+	    color: red;
+	    display: block;
+	    padding-left: 0px;
+	}
+	.greenSmall{
+	    font-size: 12px;
+	    color: green;
+	    display: block;
+	    padding-left: 0px;
+	}
+	
+	.hoverLink {
+	    cursor: hand;
+	    cursor: pointer;
+	    padding-left: 0px;
+	    display: block;
+	}
+}
+
+/* this below is a query specific to iphone 4 */
+@media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 480px) {
+	body{
+		margin : 0;
+	}
+
+	.lastColumn{
+		display: none;
+	}
+	#siteTitlePanel {
+		padding-left: 0px;
+	}
+	.mainContent {
+		margin-left: 0%;
+		margin-right: 0%;
+		width: 100%;
+	}
+	#datepicker {
+		width: 98%;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-bottom: 10px;
+		display: block;
+	}
+	#currencypicker {
+		width: 100%;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-bottom: 10px;
+		display: block;
+	}
+        #datepickerPanel{
+            display: block;
+        }
+
+        #currencypickerPanel{
+            display: block;
+        }
+
+        #buttonsPanel{
+            display: block;
+        }
+	.redSmall{
+	    font-size: 12px;
+	    color: red;
+	    display: block;
+	    padding-left: 0px;
+	}
+	.greenSmall{
+	    font-size: 12px;
+	    color: green;
+	    display: block;
+	    padding-left: 0px;
+	}
+	
+	.hoverLink {
+	    cursor: hand;
+	    cursor: pointer;
+	    padding-left: 0px;
+	    display: block;
+	}
+}
