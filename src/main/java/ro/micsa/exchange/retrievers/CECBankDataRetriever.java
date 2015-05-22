@@ -42,7 +42,7 @@ public class CECBankDataRetriever implements BankDataRetriever {
         List<ExchangeRate> rates = new ArrayList<ExchangeRate>();
         Document doc = Jsoup.parse(new URL(URL), 2000);
         
-        lastUpdateAsString = ((TextNode)doc.select(".section").get(8).childNodes().get(7)).text().substring(27).trim();
+        lastUpdateAsString = ((TextNode)doc.select(".section").get(9).childNodes().get(8)).text().substring(27).trim();
         Date date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").parse(lastUpdateAsString);
         lastUpdateAsString = DateUtils.SDF_HH_mm.format(date);
         Elements table = doc.select(".list_table").get(0).select("tr:gt(0)");
@@ -54,9 +54,9 @@ public class CECBankDataRetriever implements BankDataRetriever {
             Element currencyElement = currencyIterator.next();
             
             String currencyString = currencyElement.child(0).text();
-            String buyString = currencyElement.child(1).text().split(" ")[0];
-            String sellString = currencyElement.child(2).text().split(" ")[0];
-            
+            String buyString = currencyElement.child(3).text().split(" ")[0];
+            String sellString = currencyElement.child(4).text().split(" ")[0];
+
             CurrencyType currencyType = null;
             try {
                 currencyType = CurrencyType.valueOf(currencyString);

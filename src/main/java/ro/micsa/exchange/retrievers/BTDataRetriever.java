@@ -45,8 +45,7 @@ public class BTDataRetriever implements BankDataRetriever {
         con.timeout(2000);
         Document doc = con.get();
         
-        Elements table = doc.select(".left_col_inv table tr");
-
+        Elements table = doc.select(".left_col_inv").get(0).select(".bg_1").get(0).select("table").eq(1).select("tr");
         Iterator<Element> currencyIterator = table.iterator();
 
         int index = 0;
@@ -58,10 +57,11 @@ public class BTDataRetriever implements BankDataRetriever {
                 lastUpdateAsString = DateUtils.SDF_HH_mm.format(date);
                 break;
             }
-            String currencyString = currencyElement.child(1).text();
-            String buyString = currencyElement.child(5).text();
-            String sellString = currencyElement.child(6).text();
-            
+
+            String currencyString = currencyElement.child(0).text().split(" ")[0];
+            String buyString = currencyElement.child(2).text();
+            String sellString = currencyElement.child(3).text();
+
             CurrencyType currencyType = null;
             try {
                 currencyType = CurrencyType.valueOf(currencyString);

@@ -28,7 +28,7 @@ import java.util.List;
 @Component("INGDataRetriever")
 public class INGDataRetriever implements BankDataRetriever {
 
-    private static String ING_URL = "http://www.ing.ro/ing/ro/curs-valutar.html";
+    private static String ING_URL = "https://www.ing.ro/ing/curs-valutar.html?width=330&height=480";
     private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm/dd.MM.yyyy");
 
     @Override
