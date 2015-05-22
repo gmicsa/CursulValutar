@@ -39,11 +39,11 @@ public class LibraBankRetriever implements BankDataRetriever {
         List<ExchangeRate> exchangeRates = new ArrayList<ExchangeRate>();
         
         Document root = Jsoup.parse(new URL(LIBRA_BANK_URL), 2000);
-        Elements content = root.select("div.left_side_container").select("table:eq(1)");
+        Elements content = root.select("div.left_side_container").select("table:eq(2)");
         
         // select line with last update date
         String lastUpdatedDateString = DateUtils.RO_SDF_HH_mm.format(new Date());
-        
+
         Iterator<Element> currencyIterator = content.select("tr:gt(1)").iterator();
         while(currencyIterator.hasNext()) {
             Element newElement = currencyIterator.next();
