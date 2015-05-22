@@ -29,7 +29,7 @@ import java.util.List;
 @Component("UniCreditTiriacDataRetriver")
 public class UniCreditTiriacDataRetriver implements BankDataRetriever {
     
-    public static final String UNICREDIT_TIRIAC_URL = "http://www.unicredit-tiriac.ro/exchp";
+    public static final String UNICREDIT_TIRIAC_URL = "https://www.unicredit-tiriac.ro/ro/institutional/Diverse/SchimbValutar.html";
     private static final int DATE_UPDATED_BEGIN_INDEX = 19;
 
     @Override
