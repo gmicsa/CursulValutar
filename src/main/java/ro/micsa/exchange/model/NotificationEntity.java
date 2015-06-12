@@ -32,7 +32,7 @@ public class NotificationEntity implements Serializable {
     // threshold at which the notification is activated
     private double threshold;
     // boolean to state if value has to be greater or smaller than threshold; default higher
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private NotificationComparator comparator = NotificationComparator.GREATER_OR_EQUAL;
     //is this rule taken into account when sending notifications
     private boolean enabled = true;
