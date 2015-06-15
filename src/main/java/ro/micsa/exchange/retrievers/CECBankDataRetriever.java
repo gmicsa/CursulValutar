@@ -29,7 +29,7 @@ import java.util.List;
 @Component("CECBankDataRetriever")
 public class CECBankDataRetriever implements BankDataRetriever {
 
-    private static String URL = "https://www.cec.ro/curs-valutar.aspx";
+    private static String URL = "https://www.cec.ro/curs-valutar";
 
     @Override
     public String getBankName() {
@@ -38,24 +38,21 @@ public class CECBankDataRetriever implements BankDataRetriever {
 
     @Override
     public List<ExchangeRate> getExchangeRates() throws Exception {
-        String lastUpdateAsString = null;
         List<ExchangeRate> rates = new ArrayList<ExchangeRate>();
         Document doc = Jsoup.parse(new URL(URL), 2000);
         
-        lastUpdateAsString = ((TextNode)doc.select(".section").get(9).childNodes().get(8)).text().substring(27).trim();
-        Date date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").parse(lastUpdateAsString);
-        lastUpdateAsString = DateUtils.SDF_HH_mm.format(date);
-        Elements table = doc.select(".list_table").get(0).select("tr:gt(0)");
+        String lastUpdateAsString = DateUtils.RO_SDF_HH_mm.format(new Date());
+        Elements table = doc.select("table.views-table").get(0).select("tr");
 
         Iterator<Element> currencyIterator = table.iterator();
 
         
         while (currencyIterator.hasNext()) {
             Element currencyElement = currencyIterator.next();
-            
-            String currencyString = currencyElement.child(0).text();
-            String buyString = currencyElement.child(3).text().split(" ")[0];
-            String sellString = currencyElement.child(4).text().split(" ")[0];
+
+            String currencyString = currencyElement.children().select("td:eq(0)").select("div").text().trim();
+            String buyString = currencyElement.children().select("td:eq(3)").text().trim();
+            String sellString = currencyElement.children().select("td:eq(4)").text().trim();
 
             CurrencyType currencyType = null;
             try {

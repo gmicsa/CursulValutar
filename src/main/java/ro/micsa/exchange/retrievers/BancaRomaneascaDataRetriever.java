@@ -38,7 +38,7 @@ public class BancaRomaneascaDataRetriever implements BankDataRetriever {
     public List<ExchangeRate> getExchangeRates() throws Exception {
         String lastUpdateAsString = DateUtils.RO_SDF_HH_mm.format(new Date());
         List<ExchangeRate> rates = new ArrayList<ExchangeRate>();
-        Document doc = Jsoup.parse(new URL(URL), 5000);
+        Document doc = Jsoup.parse(new URL(URL), 8000);
 
         Elements table = doc.select("#exchangeRates tbody").select("tr");
 
