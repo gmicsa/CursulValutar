@@ -7,6 +7,7 @@ package ro.micsa.exchange.retrievers;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
@@ -23,7 +24,7 @@ import java.util.*;
 @Component("LeumiBankRetriever")
 public class LeumiBankRetriever implements BankDataRetriever {
  
-    public static final String LEUMI_BANK_URL = "http://www.leumi.ro/cursuri.html";
+    public static final String LEUMI_BANK_URL = "https://www.leumi.ro/leumi-ro/cursuri.html";
     
     private static Map<String, String> currencyAssociates;
     
@@ -49,16 +50,19 @@ public class LeumiBankRetriever implements BankDataRetriever {
         List<ExchangeRate> exchangeRates = new ArrayList<ExchangeRate>();
         
         Document root = Jsoup.parse(new URL(LEUMI_BANK_URL), 2000);
-        Element tableAllExchanges = root.select("div#datacontainer").select("table").get(2);
+        Elements tableAllExchanges = root.select("table");   //.get(2);
+
+       // for(Element e : tableAllExchanges)
+        System.out.println(root);
         
         // select line with last update date
-        String lastUpdatedDateString = DateUtils.RO_SDF_HH_mm.format(new Date());
-        
-        Iterator<Element> buyExchangesElements = tableAllExchanges.select("tr:lt(6)").iterator();
-        Iterator<Element> sellExchangesElements = tableAllExchanges.select("tr:gt(6)").iterator();
-        
-        addExchangeRates(exchangeRates, lastUpdatedDateString, buyExchangesElements, true);
-        addExchangeRates(exchangeRates, lastUpdatedDateString, sellExchangesElements, false);
+//        String lastUpdatedDateString = DateUtils.RO_SDF_HH_mm.format(new Date());
+//
+//        Iterator<Element> buyExchangesElements = tableAllExchanges.select("tr:lt(6)").iterator();
+//        Iterator<Element> sellExchangesElements = tableAllExchanges.select("tr:gt(6)").iterator();
+//
+//        addExchangeRates(exchangeRates, lastUpdatedDateString, buyExchangesElements, true);
+//        addExchangeRates(exchangeRates, lastUpdatedDateString, sellExchangesElements, false);
         
         return exchangeRates;
     }

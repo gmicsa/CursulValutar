@@ -49,26 +49,27 @@ public class RaiffeisenBankRetriever implements BankDataRetriever {
         String dateTextToParse = lastUpdateElements.text().substring(DATE_UPDATED_BEGIN_INDEX);
         String lastUpdatedDateString = DateUtils.SDF_HH_mm.format(parseRaiffeisenDateText(dateTextToParse));
         
-        Iterator<Element> currencyIterator = content.select("table").select("tr:gt(1)").iterator();
+        Iterator<Element> currencyIterator = content.select("table:eq(3)").select("tr:gt(1)").iterator();
+
         while(currencyIterator.hasNext()) {
             Element newElement = currencyIterator.next();
-            
+
             String currencyName = newElement.select("td:eq(1)").text();
             CurrencyType currencyType = null;
-            
+
             try {
                 currencyType = CurrencyType.valueOf(currencyName);
             } catch(Exception e) {
                 continue;   // no problem, continue with next currency
             }
-            
+
             // currency exist in enum, take values for buy and sell
             String currencySellValue = newElement.select("td:eq(4)").text();
             String currencyBuyValue = newElement.select("td:eq(3)").text();
-            
+
             // buy rate
             exchangeRates.add(ExchangeRateHelper.addBuyExchangeRate
-                    (currencyType, currencyBuyValue, lastUpdatedDateString));            
+                    (currencyType, currencyBuyValue, lastUpdatedDateString));
             // sell rate
             exchangeRates.add(ExchangeRateHelper.addSellExchangeRate
                     (currencyType, currencySellValue, lastUpdatedDateString));
