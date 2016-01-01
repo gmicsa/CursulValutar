@@ -40,17 +40,17 @@ public class BCRBankDataRetriever implements BankDataRetriever {
         List<ExchangeRate> rates = new ArrayList<ExchangeRate>();
         Document doc = Jsoup.parse(new URL(URL), 2000);
 
-        Elements table = doc.select(".glaze.fullsize").select("tr:gt(0)");
+        Elements tableRows = doc.select(".exchange-rates-table").select("tr:gt(0)");
 
-        Iterator<Element> currencyIterator = table.iterator();
+        Iterator<Element> currencyIterator = tableRows.iterator();
 
         while (currencyIterator.hasNext()) {
-            Element currencyElement = currencyIterator.next();
-            
-            String currencyString = currencyElement.child(0).child(0).attr("src").substring(23,26);
-            String buyString = currencyElement.child(2).text().trim().replaceAll(",", ".");
-            String sellString = currencyElement.child(3).text().trim().replaceAll(",", ".");;
-            
+            Element currencyRow = currencyIterator.next();
+
+            String currencyString = currencyRow.select("td:eq(1)").text().split(" ")[1];
+            String buyString = currencyRow.select("td:eq(2)").text().replaceAll(",", ".");
+            String sellString = currencyRow.select("td:eq(3)").text().replaceAll(",", ".");
+
             CurrencyType currencyType = null;
             try {
                 currencyType = CurrencyType.valueOf(currencyString);
