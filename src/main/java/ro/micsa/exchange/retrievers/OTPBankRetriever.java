@@ -39,30 +39,25 @@ public class OTPBankRetriever implements BankDataRetriever {
         List<ExchangeRate> exchangeRates = new ArrayList<ExchangeRate>();
         
         Document root = Jsoup.parse(new URL(OTP_BANK_URL), 2000);
-        Elements content = root.select("div#page-header");
+        Elements content = root.select("table#tabelcurs");
         
         // select line with last update date
         String lastUpdatedDateString = DateUtils.RO_SDF_HH_mm.format(new Date());
         
-        Iterator<Element> currencyIterator = content.select("table").select("tr").iterator();
+        Iterator<Element> currencyIterator = content.select("tbody").select("tr").iterator();
         while(currencyIterator.hasNext()) {
             Element newElement = currencyIterator.next();
-            
-            Elements el = newElement.select("td:eq(0)").select("strong");
-            
-            // we must replace all '*' literal characters with empty strings
-            String currencyName = el.text().replace("(", "").replace(")", "");
+
+            String currencyName = newElement.select("td:eq(0)").text();
+            String currencyBuyValue = newElement.select("td:eq(2)").text();
+            String currencySellValue = newElement.select("td:eq(3)").text();
+
             CurrencyType currencyType = null;
-            
             try {
                 currencyType = CurrencyType.valueOf(currencyName);
             } catch(Exception e) {
                 continue;   // no problem, continue with next currency
             }
-            
-            // currency exist in enum, take values for buy and sell and replace ',' with '.'
-            String currencySellValue = newElement.select("td:eq(2)").select("strong").text();
-            String currencyBuyValue = newElement.select("td:eq(1)").select("strong").text();
             
             // buy rate
             exchangeRates.add(ExchangeRateHelper.addBuyExchangeRate
