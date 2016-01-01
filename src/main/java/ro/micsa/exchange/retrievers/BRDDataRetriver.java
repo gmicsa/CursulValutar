@@ -41,9 +41,6 @@ public class BRDDataRetriver implements BankDataRetriever {
         Elements content = root.select("div.exchange-rates-table").select("table").select("tr:gt(1)");
 
         // select line with last update date
-//        Elements lastUpdateElements = content.select("tr:eq(0)");
-//        String dateTextToParse = lastUpdateElements.select("h5").text().substring(DATE_UPDATED_BEGIN_INDEX);
-//        String lastUpdatedDateString = DateUtils.SDF_HH_mm.format(parseBRDDateText(dateTextToParse));
         String lastUpdatedDateString = DateUtils.SDF_HH_mm.format(new Date());
 
         Iterator<Element> currencyIterator = content.iterator();
