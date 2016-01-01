@@ -37,7 +37,7 @@ public class EmailSenderImpl implements EmailSender {
     
     public static final String ADMIN = "admin@cursrapid.ro";
     public static final String GEO = "georgian.micsa@gmail.com";
-    public static final String ALEX = "schiaucualex@gmail.com";
+    public static final String ALEX = "schiaucualex@yahoo.com";
     public static final String[] RECIPIENTS_ERROR_MSG = new String[]{GEO, ALEX};
     
     public static final String SUBJECT = "Currency exchange rate %s for %s";
