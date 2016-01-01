@@ -25,8 +25,11 @@ import java.util.List;
 /**
  *
  * @author Alex
+ *
+ * S-a eliminat Millenium Bank, deoarece din iulie 2014 a fost prealuata de OTB Bank Romania
+ * @see https://ro.wikipedia.org/wiki/Millennium_Bank_Rom%C3%A2nia
  */
-@Component("MilleniumDataRetriver")
+//@Component("MilleniumDataRetriver")
 public class MilleniumBankRetriever implements BankDataRetriever {
     
     public static final String MILLENIUM_BANK_URL = "http://ind.millenniumbank.ro/ro/Public/Pages/welcome.aspx";
