@@ -38,28 +38,29 @@ public class BRDDataRetriver implements BankDataRetriever {
         List<ExchangeRate> exchangeRates = new ArrayList<ExchangeRate>();
         
         Document root = Jsoup.parse(new URL(BRD_URL), 2000);
-        Elements content = root.select("div.exchange-rates-table");
-        
+        Elements content = root.select("div.exchange-rates-table").select("table").select("tr:gt(1)");
+
         // select line with last update date
-        Elements lastUpdateElements = root.select("div.input-date-piker");
-        String dateTextToParse = lastUpdateElements.select("input").attr("value");        
-        String lastUpdatedDateString = DateUtils.SDF_HH_mm.format(parseBRDDateText(dateTextToParse));
-          
-        Iterator<Element> currencyIterator = content.select("table:eq(0)").select("tr:gt(1)").iterator();
+//        Elements lastUpdateElements = content.select("tr:eq(0)");
+//        String dateTextToParse = lastUpdateElements.select("h5").text().substring(DATE_UPDATED_BEGIN_INDEX);
+//        String lastUpdatedDateString = DateUtils.SDF_HH_mm.format(parseBRDDateText(dateTextToParse));
+        String lastUpdatedDateString = DateUtils.SDF_HH_mm.format(new Date());
+
+        Iterator<Element> currencyIterator = content.iterator();
         while(currencyIterator.hasNext()) {
             Element newElement = currencyIterator.next();
             String currencyName = newElement.select("td:eq(1)").text();
             CurrencyType currencyType = null;
-            
+
             try {
                 currencyType = CurrencyType.valueOf(currencyName);
             } catch(Exception e) {
                 continue;   // no problem, continue with next currency
             }
-            
+
             // currency exist in enum, take values for buy and sell
-            String currencyBuyValue = newElement.select("td:eq(5)").text();
-            String currencySellValue = newElement.select("td:eq(6)").text();
+            String currencyBuyValue = newElement.select("td:eq(2)").text();
+            String currencySellValue = newElement.select("td:eq(3)").text();
             
             // buy rate
             exchangeRates.add(ExchangeRateHelper.addBuyExchangeRate
