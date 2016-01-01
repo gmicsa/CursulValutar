@@ -23,8 +23,13 @@ import java.util.List;
 /**
  *
  * @author Alex
+ *
+ * Nu s-au mai gasit pagini cu cursuri valutare pe aceasta banca
+ * Singura pagina indexata de google de pe rbs cu cuvantul 'curs' este
+ * http://www.rbs.ro/ro/products-and-services/markets.html
+ * care nu mai exista
  */
-@Component(value="RBSDataRetriever")
+//@Component(value="RBSDataRetriever")
 public class RBSBankRetriever implements BankDataRetriever {
     
     public static final String RBS_BANK_URL = "https://www.rbs.ro/curs-valutar";
