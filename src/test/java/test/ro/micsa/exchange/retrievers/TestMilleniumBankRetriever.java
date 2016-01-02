@@ -6,6 +6,7 @@ package test.ro.micsa.exchange.retrievers;
 
 import java.util.List;
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.retrievers.MilleniumBankRetriever;
@@ -14,6 +15,7 @@ import ro.micsa.exchange.retrievers.MilleniumBankRetriever;
  *
  * @author Alex
  */
+@Ignore
 public class TestMilleniumBankRetriever {
     
     @Test

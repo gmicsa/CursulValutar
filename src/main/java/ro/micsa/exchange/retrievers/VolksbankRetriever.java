@@ -23,8 +23,12 @@ import java.util.List;
 /**
  *
  * @author Alex
+ *
+ * S-a eliminat Volksbank, deoarece de la 1 ianuarie 2016 a devenit aceeasi banca cu Banca Transilvania
+ * @see http://www.volksbank.ro/
+ *
  */
-@Component(value="VolksbankDataRetriever")
+//@Component(value="VolksbankDataRetriever")
 public class VolksbankRetriever implements BankDataRetriever {
 
     public static final String VOLKSBANK_BANK_URL = "http://www.volksbank.ro/ro/AfisareCursValutar";
