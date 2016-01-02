@@ -237,7 +237,7 @@
 
                 <configuration>
                     <api>JPA</api>
-                    <mappingIncludes>**/model/*.class</mappingIncludes>
+                    <!--<mappingIncludes>**/model/*.class</mappingIncludes>-->
                     <verbose>true</verbose>
                     <fork>false</fork>
                 </configuration>
