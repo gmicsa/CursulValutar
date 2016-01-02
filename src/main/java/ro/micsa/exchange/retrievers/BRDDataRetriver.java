@@ -70,16 +70,4 @@ public class BRDDataRetriver implements BankDataRetriever {
         return exchangeRates;
     }
 
-    /**
-     * parse a BRD last updated date text, available in romanian locale
-     * and transforms it into a date
-     * @param dateTextToParse
-     * @return
-     * @throws ParseException 
-     */
-    private Date parseBRDDateText(String dateTextToParse) throws ParseException{
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", new Locale("ro","RO"));
-        return format.parse(dateTextToParse);
-    }
-    
 }
