@@ -22,8 +22,10 @@ import java.util.*;
 /**
  *
  * @author georgian
+ * Nu s-au mai gasit pagini cu cursuri valutare pe aceasta banca
+ *
  */
-@Component("CityBankDataRetriever")
+//@Component("CityBankDataRetriever")
 public class CityBankDataRetriever implements BankDataRetriever {
 
     private static String URL = "http://www.citibank.ro/curs-valutar.html";

@@ -5,6 +5,7 @@
 package test.ro.micsa.exchange.retrievers;
 
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import ro.micsa.exchange.retrievers.CityBankDataRetriever;
 
@@ -12,6 +13,7 @@ import ro.micsa.exchange.retrievers.CityBankDataRetriever;
  *
  * @author georgian
  */
+@Ignore
 public class TestCityBankRetriever {
 
     @Test
