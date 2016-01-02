@@ -27,7 +27,7 @@ import java.util.List;
 @Component("BancaCarpaticaDataRetriever")
 public class BancaCarpaticaDataRetriever implements BankDataRetriever {
 
-    private static String URL = "http://www.carpatica.ro/index.php?option=com_content&view=article&id=291&Itemid=366";
+    private static String URL = "https://www.carpatica.ro/curs-valutar/";
 
     @Override
     public String getBankName() {
@@ -43,32 +43,20 @@ public class BancaCarpaticaDataRetriever implements BankDataRetriever {
         con.timeout(2000);
         Document doc = con.get();
 
-        Elements table = doc.select("table").get(2).select("tr:gt(1)");
+        Elements table = doc.select("table").select("tr:gt(1)");
 
         Iterator<Element> currencyIterator = table.iterator();
 
-        int count = 1;
         while (currencyIterator.hasNext()) {
-            if(count > 12){
-                break;
-            }
-            count++;
             Element currencyElement = currencyIterator.next();
             
-            String currencyString = currencyElement.child(1).child(0).text().substring(2);
-            String buyString = currencyElement.child(4).text().trim().replace(",", ".");
-            if(buyString.equals("-")){
-                continue;
-            }
-            String sellString = currencyElement.child(3).text().trim().replace(",", ".");
-            
+            String currencyString = currencyElement.select("td:eq(1)").text().split(" ")[1];
+            String buyString = currencyElement.select("td:eq(4)").text().trim().replace(",", ".");
+            String sellString = currencyElement.select("td:eq(5)").text().trim().replace(",", ".");
+
             CurrencyType currencyType = null;
             try {
-                if(currencyString.equals("EURO")){
-                    currencyType = CurrencyType.EUR;
-                }else{
-                    currencyType = CurrencyType.valueOf(currencyString);
-                }
+                currencyType = CurrencyType.valueOf(currencyString);
             } catch (Exception e) {
                 continue;
             }
