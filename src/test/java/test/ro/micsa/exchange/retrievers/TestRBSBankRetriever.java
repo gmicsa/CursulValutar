@@ -11,6 +11,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import junit.framework.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.retrievers.RBSBankRetriever;
@@ -19,6 +20,7 @@ import ro.micsa.exchange.retrievers.RBSBankRetriever;
  *
  * @author Alex
  */
+@Ignore
 public class TestRBSBankRetriever {
 
     @BeforeClass
