@@ -55,12 +55,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-1.0-sdk</artifactId>
-            <version>${appengine.sdk.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-api-jpa</artifactId>
             <version>${datanucleus.jpa.version}</version>
