@@ -39,7 +39,7 @@ public class OTPBankRetriever implements BankDataRetriever {
         List<ExchangeRate> exchangeRates = new ArrayList<ExchangeRate>();
         
         Document root = Jsoup.parse(new URL(OTP_BANK_URL), 2000);
-        Elements content = root.select("table#tabelcurs");
+        Elements content = root.select("table.tabelcurs");
         
         // select line with last update date
         String lastUpdatedDateString = DateUtils.RO_SDF_HH_mm.format(new Date());
