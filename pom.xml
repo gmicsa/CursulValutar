@@ -37,11 +37,6 @@
             <version>${appengine.sdk.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-testing</artifactId>
             <version>${appengine.sdk.version}</version>

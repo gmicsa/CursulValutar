@@ -4,27 +4,19 @@
  */
 package ro.micsa.exchange.retrievers;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.utils.DateUtils;
 import ro.micsa.exchange.utils.ExchangeRateHelper;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -74,11 +66,42 @@ public class UniCreditTiriacDataRetriver implements BankDataRetriever {
     }
 
     private String getJsonResponseFromPOSTRequest() throws IOException {
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpPost httpPost = configureHttpPost();
+        HttpURLConnection httpURLConnection = configureHttpURLConnection();
 
-        HttpResponse httpResponse = httpClient.execute(httpPost);
-        return EntityUtils.toString(httpResponse.getEntity());
+        BufferedReader in = new BufferedReader(new InputStreamReader(
+                httpURLConnection.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+
+        return response.toString();
+    }
+
+    private HttpURLConnection configureHttpURLConnection() throws IOException {
+        URL url = new URL(UNICREDIT_TIRIAC_URL);
+        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+        httpURLConnection.setReadTimeout(5000);
+        httpURLConnection.addRequestProperty("Content-Type", "application/json");
+        httpURLConnection.addRequestProperty("UserId", "");
+        httpURLConnection.addRequestProperty("EntityCode", "RO");
+        httpURLConnection.addRequestProperty("Language", "RO");
+        httpURLConnection.addRequestProperty("SourceSystem", "PWS");
+        httpURLConnection.addRequestProperty("Product", "PWS");
+
+        String dateFormattedForJson = formatDateToJson(new Date());
+        String jsonToSend = "{'Currency': '*ALL','DateFrom':'" + dateFormattedForJson
+                + "','DateTo':'" + dateFormattedForJson + "'}";
+
+        httpURLConnection.setDoOutput(true);
+        OutputStreamWriter w = new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8");
+
+        w.write(jsonToSend);
+        w.close();
+
+        return httpURLConnection;
     }
 
     private void modifyMapWithJsonObject(Map<String, DateExchangeRates> currencyDateExchangeRates, JSONObject jsonObject) throws ParseException {
@@ -95,22 +118,6 @@ public class UniCreditTiriacDataRetriver implements BankDataRetriever {
 
     private String getJsonProperty(JSONObject jsonObject, String key) {
         return jsonObject.getString(key);
-    }
-
-    private HttpPost configureHttpPost() throws UnsupportedEncodingException {
-        HttpPost httpPost = new HttpPost(UNICREDIT_TIRIAC_URL);
-        httpPost.setHeader("Content-Type", "application/json");
-        httpPost.setHeader("UserId", "");
-        httpPost.setHeader("EntityCode", "RO");
-        httpPost.setHeader("Language", "RO");
-        httpPost.setHeader("SourceSystem", "PWS");
-        httpPost.setHeader("Product", "PWS");
-
-        String dateFormattedForJson = formatDateToJson(new Date());
-        String jsonToSend = "{'Currency': '*ALL','DateFrom':'" + dateFormattedForJson
-                + "','DateTo':'" + dateFormattedForJson + "'}";
-        httpPost.setEntity(new ByteArrayEntity(jsonToSend.getBytes("UTF-8")));
-        return httpPost;
     }
 
     private String formatDateToJson(Date date) {
