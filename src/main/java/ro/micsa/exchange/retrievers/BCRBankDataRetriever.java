@@ -4,20 +4,22 @@
  */
 package ro.micsa.exchange.retrievers;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
-import ro.micsa.exchange.utils.DateUtils;
 import ro.micsa.exchange.utils.ExchangeRateHelper;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -27,7 +29,7 @@ import java.util.List;
 @Component("BCRBankDataRetriever")
 public class BCRBankDataRetriever implements BankDataRetriever {
 
-    private static String URL = "http://www.bcr.ro/ro/curs-valutar";
+    private static String BCR_URL = "https://www.bcr.ro/bin/erstegroup/fx?institute=785";
 
     @Override
     public String getBankName() {
@@ -36,31 +38,55 @@ public class BCRBankDataRetriever implements BankDataRetriever {
 
     @Override
     public List<ExchangeRate> getExchangeRates() throws Exception {
-        String lastUpdateAsString = DateUtils.RO_SDF_HH_mm.format(new Date());
-        List<ExchangeRate> rates = new ArrayList<ExchangeRate>();
-        Document doc = Jsoup.parse(new URL(URL), 2000);
+        List<ExchangeRate> rates = new ArrayList<>();
+        JSONArray jsonArray = getJSonArrayOfCurrencies();
 
-        Elements tableRows = doc.select(".exchange-rates-table").select("tr:gt(0)");
-
-        Iterator<Element> currencyIterator = tableRows.iterator();
-
-        while (currencyIterator.hasNext()) {
-            Element currencyRow = currencyIterator.next();
-
-            String currencyString = currencyRow.select("td:eq(1)").text().split(" ")[1];
-            String buyString = currencyRow.select("td:eq(2)").text().replaceAll(",", ".");
-            String sellString = currencyRow.select("td:eq(3)").text().replaceAll(",", ".");
+        for(int index = 0; index < jsonArray.length(); index ++) {
+            JSONObject currencyJsonObject = jsonArray.getJSONObject(index);
 
             CurrencyType currencyType = null;
             try {
-                currencyType = CurrencyType.valueOf(currencyString);
+                currencyType = CurrencyType.valueOf(currencyJsonObject.getString("currency"));
             } catch (Exception e) {
                 continue;
             }
 
-            rates.add(ExchangeRateHelper.addBuyExchangeRate(currencyType, buyString, lastUpdateAsString));
-            rates.add(ExchangeRateHelper.addSellExchangeRate(currencyType, sellString, lastUpdateAsString));
+            JSONObject exchangeRateObject = currencyJsonObject.getJSONObject("exchangeRate");
+            String buyString = String.valueOf(exchangeRateObject.getDouble("buy"));
+            String sellString = String.valueOf(exchangeRateObject.getDouble("sell"));
+            Date lastModified = parseBCRDateText(exchangeRateObject.getString("lastModified"));
+
+            rates.add(ExchangeRateHelper.addBuyExchangeRate(currencyType, buyString, lastModified.toString()));
+            rates.add(ExchangeRateHelper.addSellExchangeRate(currencyType, sellString, lastModified.toString()));
         }
+
         return rates;
     }
+
+    private JSONArray getJSonArrayOfCurrencies() throws IOException {
+        URL url = new URL(BCR_URL);
+        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+        String jsonResponse = getJsonResponseFromGETRequest(httpURLConnection);
+
+        return new JSONObject(jsonResponse).getJSONArray("fx");
+    }
+
+    private Date parseBCRDateText(String dateTextToParse) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        return format.parse(dateTextToParse);
+    }
+
+    private String getJsonResponseFromGETRequest(HttpURLConnection httpURLConnection) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(
+                httpURLConnection.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+
+        return response.toString();
+    }
+
 }
