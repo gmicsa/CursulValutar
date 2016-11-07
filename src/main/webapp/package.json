@@ -1,5 +1,5 @@
 {
-  "name": "cursul-valutar",
+  "name": "exchange-service",
   "version": "1.0.0",
   "description": "Afla cursul valutar",
   "main": "index.html",
