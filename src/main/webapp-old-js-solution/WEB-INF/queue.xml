@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queue-entries>
+    <queue>
+        <name>alerts-queue</name>
+        <rate>8/m</rate>
+        <max-concurrent-requests>8</max-concurrent-requests>
+        <bucket-size>100</bucket-size>
+    </queue>
+</queue-entries>
