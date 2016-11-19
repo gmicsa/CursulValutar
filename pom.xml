@@ -299,7 +299,7 @@
                         <phase>generate-sources</phase>
                         <configuration>
                             <workingDirectory>${project.basedir}/src/main/webapp</workingDirectory>
-                            <executable>npm</executable>
+                            <executable>npm.cmd</executable>
                             <arguments>
                                 <argument>install</argument>
                             </arguments>
@@ -313,7 +313,7 @@
                         <phase>generate-sources</phase>
                         <configuration>
                             <workingDirectory>${project.basedir}/src/main/webapp/app</workingDirectory>
-                            <executable>npm</executable>
+                            <executable>npm.cmd</executable>
                             <arguments>
                                 <argument>run</argument>
                                 <argument>tsc</argument>
