@@ -288,35 +288,6 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.samaxes.maven</groupId>
-                <artifactId>minify-maven-plugin</artifactId>
-                <version>1.5.2</version>
-                <executions>
-                    <execution>
-                        <id>default-minify</id>
-                        <phase>process-resources</phase>
-                        <configuration>
-                            <cssSourceDir>css</cssSourceDir>
-                            <cssSourceFiles>
-                                <cssSourceFile>main.css</cssSourceFile>
-                                <cssSourceFile>main-narrow.css</cssSourceFile>
-                                <cssSourceFile>main-mobile-large.css</cssSourceFile>
-                                <cssSourceFile>main-tablet.css</cssSourceFile>
-                            </cssSourceFiles>
-                            <cssFinalFile>main.css</cssFinalFile>
-                            <jsSourceDir>js</jsSourceDir>
-                            <jsSourceFiles>
-                                <jsSourceFile>main.js</jsSourceFile>
-                            </jsSourceFiles>
-                            <jsFinalFile>main.js</jsFinalFile>
-                        </configuration>
-                        <goals>
-                            <goal>minify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 </project>
