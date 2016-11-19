@@ -4,7 +4,11 @@
   "description": "Afla cursul valutar",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && concurrently \"npm run tsc:w\" ",
+    "postinstall": "typings install",
+    "tsc": "tsc --outDir ./js",
+    "tsc:w": "tsc -w",
+    "typings": "typings"
   },
   "keywords": [
     "curs",
@@ -43,7 +47,6 @@
   },
   "devDependencies": {
     "concurrently": "^3.0.0",
-    "lite-server": "^2.2.2",
     "typescript": "^2.0.3",
     "typings": "^1.5.0"
   }
