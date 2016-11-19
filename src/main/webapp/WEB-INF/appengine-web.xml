@@ -11,7 +11,7 @@ xsi:schemaLocation="http://appengine.google.com/ns/1.0 http://googleappengine.go
     <threadsafe>true</threadsafe>
     
     <static-files>
-        <include path="/app/**" />
+        <include path="/js/**" />
         <include path="/img/**" />
         <include path="/locales/**" />
     </static-files>
