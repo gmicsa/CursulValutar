@@ -1,0 +1,66 @@
+{
+    "app": {
+      "title": "CursRapid.ro",
+      "moto": "Quickly find the exchange rates...",
+      "alerts_description": "Define an alert",
+      "about": "<ul><li>The application presents the sell/buy exchange rates for all Romanian banks and the reference exchange rate of National Bank of Romania starting with March 1st 2012.</li><li>10 currencies including EUR, USD, GBP and CHF.</li><li>Chart with the exchange rates of the last 10 days and future estimation based on past values.</li><li>The rates are retrieved each day from the web sites of the banks, each 2 hours between 8 and 18. </li><li>The exchange rates are informative and it might be the case that they do not match the real rates from the bank offices.</li><li>For HUF and JPY, 100 units exchange rates are displayed.</li><li>Contact: <a href='mailto:admin@cursrapid.ro'>admin@cursrapid.ro</a></li></ul>",
+      "about_title": "Information about the application",
+      "reference_bnr": "BNR reference rate: ",
+      "date_select": "Select date: ",
+      "currency_select": "Select currency: ",
+      "transaction_select": "Select transaction: ",
+      "bank_select": "Select bank: ",
+      "sell" : "Sell",
+      "buy" : "Buy",
+      "welcome": "Welcome"
+    },
+    "button":{
+        "show": "Show",
+        "save": "Save alert",
+        "about": "About",
+        "history" : "History",
+        "history_tooltip": "Show history chart for last 10 days",
+        "loginFacebook":"Login with Facebook",
+        "logout":"Logout",
+        "alerts":"Alerts"
+    },
+    "column":{
+        "bank": "Bank",
+        "sell": "Sell rate",
+        "buy" : "Buy rate",
+        "last_update" : "Last update"
+    },
+    "error":{
+        "error" : "Error",
+        "info": "Info",
+        "request_error" : "Error on request. Please retry later.",
+        "no_rates_found" : "No exchange rates found for selected date.",
+        "bad_date" : "Incorrect date format.",
+        "weekend": "During weekends no exchange rate is recorded, please choose a day of the week.",
+        "start" : "Exchange rates are recorded starting with March 1st 2012.",
+        "invalid_value" : "Please add a valid value in RON"
+    },
+    "graphic": {
+        "appraisal" : "Appraisal",
+        "exchange" : "Exchange rate",
+        "description" : "Chart for last 10 days in ",
+        "appraisal-future" : "Future evolution appraisal",
+        "sell" : "Sell",
+        "buy" : "Buy",
+        "history" : "History for ",
+        "info-display" : "History chart can be displayed only in landscape mode."
+    },
+    "alerts":{
+        "info": "Set your first alert",
+        "send_alert": "Send me an e-mail when the exchange rate ",
+        "than": "than",
+        "greater_equal" : "greater or equal",
+        "less_equal": "less or equal",
+        "active" : "Alert is active ",
+        "request_ok" : "Alert has been saved successfuly.",
+        "currency_select": "for currency ",
+        "transaction_select": "for transaction ",
+        "bank_select": "of bank ",
+        "gets": "gets "
+    }
+}

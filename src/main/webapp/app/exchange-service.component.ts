@@ -4,8 +4,11 @@ import {Rate} from "./rate";
 
 @Component({
     selector: 'exchange-service',
-    template: `<h1>Hello</h1>
-        <div>What's up</div>
+    template: `<h1>CursRapid.ro</h1>
+        <div>Afli rapid cursul</div>
+        <div *ngIf="!error">
+            {{this.rates}}
+        </div>
     `,
     providers: [RatesService]
 })
