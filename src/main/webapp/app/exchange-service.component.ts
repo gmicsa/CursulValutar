@@ -17,6 +17,7 @@ export class ExchangeServiceComponent extends OnInit {
     error: any;
     
     constructor(private ratesService : RatesService) {
+        super();
     }
     
     ngOnInit(): void {
