@@ -9,21 +9,21 @@ import {Rate} from "./rate";
 @Injectable()
 export class RatesService {
     private urlGetRates = 'services/rates';
-    private urlDateAndCurrency = '16/11/16' + '/' + 'EUR';
+    private urlDateAndCurrency = '/2016-11-24/EUR';
     
     constructor(private http : Http) {
     }
 
     retrieveRates(): Promise<Rate[]> {
         console.log('Retrieve rates is executing..');
-        return this.http.get(this.urlGetRates + '/' + this.urlDateAndCurrency)
+        return this.http.get(this.urlGetRates + this.urlDateAndCurrency)
             .toPromise()
             .then(response => response.json().map(item => new Rate(item)))
             .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {
-        console.error('There was an error ', error);
+        console.error('There was an error ' + error);
         return Promise.reject(error.message | error);
     }
 

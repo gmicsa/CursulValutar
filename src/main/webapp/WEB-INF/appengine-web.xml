@@ -21,6 +21,8 @@ xsi:schemaLocation="http://appengine.google.com/ns/1.0 http://googleappengine.go
         <include path="/node_modules/**.js" />
         <include path="/node_modules/**.js.map" />
 
+        <!-- include also typescript files -->
+        <include path="/app/**.ts" />
         <!-- include transpiled files from typescript into javascript -->
         <include path="/app/js-out/**" />
 
