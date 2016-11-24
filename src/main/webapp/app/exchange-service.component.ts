@@ -9,6 +9,12 @@ import {Rate} from "./rate";
         <div *ngIf="!error">
             {{this.rates}}
         </div>
+        <div>
+            Rates are {{this.rates}}
+        </div>
+        <div>
+            Error is {{this.error}}
+        </div>
     `,
     providers: [RatesService]
 })
