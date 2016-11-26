@@ -9,11 +9,8 @@ import {Rate} from "./rate";
         <div *ngIf="!error">
             {{this.rates}}
         </div>
-        <div>
-            Rates are {{this.rates}}
-        </div>
-        <div>
-            Error is {{this.error}}
+        <div *ngIf="error">
+            {{this.error}}
         </div>
     `,
     providers: [RatesService]
@@ -32,8 +29,8 @@ export class ExchangeServiceComponent extends OnInit {
     
     private retrieveRatesFromService(): void {
         this.ratesService.retrieveRates().then(
-           rates => {
-               this.rates = rates;
+           data => {
+               this.rates = data;
                this.error = null;
            },
             error => {
