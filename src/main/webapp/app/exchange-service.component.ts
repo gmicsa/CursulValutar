@@ -7,12 +7,9 @@ import {Rate} from "./rate";
     template: `<h1>CursRapid.ro</h1>
         <div>Afli rapid cursul</div>
         <div *ngIf="!error">
-            {{this.rates}}
-        </div>
-        <div>
             Rates are {{this.rates}}
         </div>
-        <div>
+        <div *ngIf="error">
             Error is {{this.error}}
         </div>
     `,
@@ -32,8 +29,8 @@ export class ExchangeServiceComponent extends OnInit {
     
     private retrieveRatesFromService(): void {
         this.ratesService.retrieveRates().then(
-           rates => {
-               this.rates = rates;
+           data => {
+               this.rates = data;
                this.error = null;
            },
             error => {
