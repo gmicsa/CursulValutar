@@ -7,10 +7,10 @@ import {Rate} from "./rate";
     template: `<h1>CursRapid.ro</h1>
         <div>Afli rapid cursul</div>
         <div *ngIf="!error">
-            {{this.rates}}
+            Rates are {{this.rates}}
         </div>
         <div *ngIf="error">
-            {{this.error}}
+            Error is {{this.error}}
         </div>
     `,
     providers: [RatesService]
