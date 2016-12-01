@@ -21,26 +21,21 @@
             '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
             '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
-            '@angular2-material/core': 'npm:@angular2-material/core/core.umd.js',
-            'ng2-material': 'npm:ng2-material',
             // other libraries
             'rxjs': 'npm:rxjs',
-            'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api'
+            'ng2-table': 'npm:ng2-table'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
+            js: {
+              format: 'register',
+              defaultExtension: 'js'  
+            },
             app: {
-                main: './js-out/main.js',
+                main: './js-out/main',
                 defaultExtension: 'js'
             },
             rxjs: {
-                defaultExtension: 'js'
-            },
-            'ng2-material': {
-                defaultExtension: 'js'
-            },
-            'angular2-in-memory-web-api': {
-                main: './index.js',
                 defaultExtension: 'js'
             }
         }
