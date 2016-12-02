@@ -5,32 +5,7 @@ import {Rate} from "./rate";
 
 @Component({
     selector: 'exchange-service',
-    template: `<h1>CursRapid.ro</h1>
-        <div>Afli rapid cursul</div>
-        <div *ngIf="!error">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th style="width: 40%">Bank</th>
-                    <th style="width: 20%">Buy rate</th>
-                    <th style="width: 20%">Sell rate</th>
-                    <th style="width: 20%">Last update</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let aggregateRate of aggregatedRates">
-                    <td class="text-right">{{aggregateRate.bankName}}</td>
-                    <td>{{aggregateRate.buyValue}}</td>
-                    <td>{{aggregateRate.sellValue}}</td>
-                    <td>{{aggregateRate.lastChangedAt}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div *ngIf="error">
-            Error is {{this.error}}
-        </div>
-    `,
+    templateUrl: 'html/exchangerates.html',
     providers: [RatesService]
 })
 export class ExchangeServiceComponent extends OnInit {
