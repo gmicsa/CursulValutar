@@ -16,35 +16,26 @@ export class AggregatedRate {
     sellVariance: string;
     sellPercentVariance: string;
     
-    private constructor() {}
-    
     constructor(buyRate: Rate, sellRate: Rate) {
-        return this.createAggregatedRate(buyRate, sellRate);
-    }
-
-    private createAggregatedRate(buyRate: Rate, sellRate: Rate): AggregatedRate {
         Rate.checkMatchingRates(buyRate, sellRate);
 
-        var aggregatedRate = new AggregatedRate();
-        aggregatedRate.bankName = buyRate.bankName;
-        aggregatedRate.currencyType = buyRate.currencyType;
-        aggregatedRate.lastChangedAt = buyRate.lastChangedAt;
-        this.computeAggregatedBuyRateValues(aggregatedRate, buyRate);
-        this.computeAggregatedSellRateValues(aggregatedRate, sellRate);
-
-        return aggregatedRate;
+        this.bankName = buyRate.bankName;
+        this.currencyType = buyRate.currencyType;
+        this.lastChangedAt = buyRate.lastChangedAt;
+        this.computeAggregatedBuyRateValues(buyRate);
+        this.computeAggregatedSellRateValues(sellRate);
     }
 
-    private computeAggregatedBuyRateValues(aggregatedRate:AggregatedRate, rate:Rate) {
-        aggregatedRate.buyValue = rate.value.toFixed(4);
-        aggregatedRate.buyVariance = this.convertNumberToSignedStringNumber(rate.evolution);
-        aggregatedRate.buyPercentVariance = this.convertNumberToSignedStringNumber(this.computeVariance(rate.value, rate.evolution));
+    private computeAggregatedBuyRateValues(rate:Rate) {
+        this.buyValue = rate.value.toFixed(4);
+        this.buyVariance = this.convertNumberToSignedStringNumber(rate.evolution);
+        this.buyPercentVariance = this.convertNumberToSignedStringNumber(this.computeVariance(rate.value, rate.evolution));
     }
 
-    private computeAggregatedSellRateValues(aggregatedRate:AggregatedRate, rate:Rate) {
-        aggregatedRate.sellValue = rate.value.toFixed(4);
-        aggregatedRate.sellVariance = this.convertNumberToSignedStringNumber(rate.evolution);
-        aggregatedRate.sellPercentVariance = this.convertNumberToSignedStringNumber(this.computeVariance(rate.value, rate.evolution));
+    private computeAggregatedSellRateValues(rate:Rate) {
+        this.sellValue = rate.value.toFixed(4);
+        this.sellVariance = this.convertNumberToSignedStringNumber(rate.evolution);
+        this.sellPercentVariance = this.convertNumberToSignedStringNumber(this.computeVariance(rate.value, rate.evolution));
     }
 
     private convertNumberToSignedStringNumber(aNumber: number): string
@@ -56,7 +47,7 @@ export class AggregatedRate {
         }
     }
 
-    private computeVariance(value:number, evolution:number) {
+    private computeVariance(value: number, evolution: number) {
         return (100 * evolution / (value - evolution));
     }
 }
