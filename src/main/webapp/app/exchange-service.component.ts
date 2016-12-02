@@ -1,5 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {NgTableComponent} from "ng2-table/ng2-table";
 import {RatesService} from "./exchange-service.service";
 import {Rate} from "./rate";
 
@@ -8,28 +7,43 @@ import {Rate} from "./rate";
     template: `<h1>CursRapid.ro</h1>
         <div>Afli rapid cursul</div>
         <div *ngIf="!error">
-            <ng-table [config]="config" [rows]="rows" [columns]="columns">
-            </ng-table>
+            <table class="table table-striped" [mfData]="rates" #exportData="mfDataTable">
+                <thead>
+                <tr>
+                    <th style="width: 40%">
+                        <mfDefaultSorter by="bank">Bank</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="buyRate">Buy rate</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="sellRate">Sell rate</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="lastUpdate">Last update</mfDefaultSorter>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let bank of exportData.data">
+                    <td class="text-right">{{bank.bankName}}</td>
+                    <td>{{bank.value}}</td>
+                    <td>{{bank.transactionType}}</td>
+                    <td>{{bank.lastChangedAt}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div *ngIf="error">
             Error is {{this.error}}
         </div>
     `,
-    directives: [NgTableComponent],
     providers: [RatesService]
 })
 export class ExchangeServiceComponent extends OnInit {
-    rows: Array<Rate> = [];
-    columns: Array<any> = this.initColumnsWithHeaders();
     rates: Rate[];
     error: any;
 
-    public config: any = {
-      paging: false,
-      sorting: {columns: this.columns},
-      className: ['table-striped', 'table-bordered']
-    };
-    
     constructor(private ratesService : RatesService) {
         super();
     }
@@ -49,7 +63,6 @@ export class ExchangeServiceComponent extends OnInit {
                 this.rates = [];
             }
         )
-            
     }
 
     private initColumnsWithHeaders(): Array<any> {
