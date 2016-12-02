@@ -9,7 +9,7 @@ import {Rate} from "./rate";
 @Injectable()
 export class RatesService {
     private urlGetRates = 'services/rates';
-    private urlDateAndCurrency = '/2016-11-29/EUR';
+    private urlDateAndCurrency = '/2016-12-02/EUR';
     
     constructor(private http : Http) {
     }
