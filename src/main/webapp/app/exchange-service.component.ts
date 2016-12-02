@@ -7,29 +7,21 @@ import {Rate} from "./rate";
     template: `<h1>CursRapid.ro</h1>
         <div>Afli rapid cursul</div>
         <div *ngIf="!error">
-            <table class="table table-striped" [mfData]="rates" #exportData="mfDataTable">
+            <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th style="width: 40%">
-                        <mfDefaultSorter by="bank">Bank</mfDefaultSorter>
-                    </th>
-                    <th style="width: 20%">
-                        <mfDefaultSorter by="buyRate">Buy rate</mfDefaultSorter>
-                    </th>
-                    <th style="width: 20%">
-                        <mfDefaultSorter by="sellRate">Sell rate</mfDefaultSorter>
-                    </th>
-                    <th style="width: 20%">
-                        <mfDefaultSorter by="lastUpdate">Last update</mfDefaultSorter>
-                    </th>
+                    <th style="width: 40%">Bank</th>
+                    <th style="width: 20%">Buy rate</th>
+                    <th style="width: 20%">Sell rate</th>
+                    <th style="width: 20%">Last update</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let bank of exportData.data">
-                    <td class="text-right">{{bank.bankName}}</td>
-                    <td>{{bank.value}}</td>
-                    <td>{{bank.transactionType}}</td>
-                    <td>{{bank.lastChangedAt}}</td>
+                <tr *ngFor="let rate of rates">
+                    <td class="text-right">{{rate.bankName}}</td>
+                    <td>{{rate.value}}</td>
+                    <td>{{rate.transactionType}}</td>
+                    <td>{{rate.lastChangedAt}}</td>
                 </tr>
                 </tbody>
             </table>
