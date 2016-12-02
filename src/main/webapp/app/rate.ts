@@ -14,5 +14,13 @@ export class Rate {
     constructor(item: Object) {
         Object.assign(this, item);
     }
+
+    public static haveSameBankName(rate1:Rate, rate2:Rate) {
+        return rate1.bankName == rate2.bankName;
+    }
+
+    static haveDifferentBankNames(rate1:Rate, rate2:Rate) {
+        return ! Rate.haveSameBankName(rate1, rate2);
+    }
     
 }
