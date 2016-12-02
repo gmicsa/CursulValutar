@@ -44,7 +44,7 @@ public class DataFetchCronJobServiceImpl implements RESTService{
     @Override
     public Response execute() {
         // no need to run this on Saturdays or Sundays because the rates do not change in that interval
-        if(!DateUtils.currentDateIsWeekend()){
+        if(true){
             log.info("Executing cron job...");
             
             Date now = new Date();

@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NgTableComponent} from "ng2-table";
+import {NgTableComponent} from "ng2-table/ng2-table";
 import {RatesService} from "./exchange-service.service";
 import {Rate} from "./rate";
 
@@ -15,6 +15,7 @@ import {Rate} from "./rate";
             Error is {{this.error}}
         </div>
     `,
+    directives: [NgTableComponent],
     providers: [RatesService]
 })
 export class ExchangeServiceComponent extends OnInit {
