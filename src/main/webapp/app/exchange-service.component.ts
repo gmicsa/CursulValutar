@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {RatesService} from "./exchange-service.service";
+import {AggregatedRate} from "./aggregated-rate";
 import {Rate} from "./rate";
 
 @Component({
@@ -34,6 +35,7 @@ import {Rate} from "./rate";
 })
 export class ExchangeServiceComponent extends OnInit {
     rates: Rate[];
+    aggregatedRates: AggregatedRate[];
     error: any;
 
     constructor(private ratesService : RatesService) {
@@ -53,6 +55,7 @@ export class ExchangeServiceComponent extends OnInit {
             error => {
                 this.error = error;
                 this.rates = [];
+                this.aggregatedRates = [];
             }
         )
     }
