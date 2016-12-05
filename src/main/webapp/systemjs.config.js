@@ -22,7 +22,9 @@
             '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             // other libraries
-            'rxjs': 'npm:rxjs'
+            'rxjs': 'npm:rxjs',
+            'moment': 'npm:moment',
+            'ng2-datepicker': 'npm:ng2-datepicker/bundle/ng2-datepicker.umd.js'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -35,6 +37,10 @@
                 defaultExtension: 'js'
             },
             rxjs: {
+                defaultExtension: 'js'
+            },
+            'moment': {
+                main: 'moment',
                 defaultExtension: 'js'
             }
         }
