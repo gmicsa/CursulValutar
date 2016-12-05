@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {RatesService} from "./exchange-service.service";
 import {AggregatedRate} from "./aggregated-rate";
+import * as moment from 'moment';
 import {Rate} from "./rate";
 
 @Component({
@@ -12,6 +13,7 @@ export class ExchangeServiceComponent extends OnInit {
     readonly BNR_BANK_NAME = 'BNR';
 
     rates: Rate[];
+    date: moment.Moment;
     bnrReferenceRate: Rate;
     aggregatedRates: AggregatedRate[];
     error: any;

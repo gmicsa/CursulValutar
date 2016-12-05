@@ -1,6 +1,11 @@
 <h1>CursRapid.ro</h1>
 <div>Afli rapid cursul</div>
 <div *ngIf="!error">
+    <div>
+        <label>Select date:</label>
+        <datepicker-ionic singleSelect ([ngModel])="date"></datepicker-ionic>
+    </div>
+
     <table class="table table-striped">
         <thead>
         <tr>
