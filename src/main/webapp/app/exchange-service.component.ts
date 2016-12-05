@@ -7,13 +7,20 @@ import {Rate} from "./rate";
 @Component({
     selector: 'exchange-service',
     templateUrl: 'html/exchangerates.html',
-    providers: [RatesService]
+    providers: [RatesService],
+    styles: [`
+    datepicker-ionic {
+      display: inline-block;
+      margin-left: 150px;
+    }
+  `]
 })
 export class ExchangeServiceComponent extends OnInit {
     readonly BNR_BANK_NAME = 'BNR';
+    readonly DATE_FORMAT = "YYYY-MM-DD";
 
     rates: Rate[];
-    date: moment.Moment;
+    dateSelected: moment.Moment;
     bnrReferenceRate: Rate;
     aggregatedRates: AggregatedRate[];
     error: any;
@@ -23,11 +30,18 @@ export class ExchangeServiceComponent extends OnInit {
     }
     
     ngOnInit(): void {
+        this.dateSelected = moment(new Date());
+        console.log("Current date is ", this.dateSelected.format(this.DATE_FORMAT));
         this.retrieveRatesFromService();
+    }
+
+    dateChangedEvent(event: moment.Moment) {
+        this.dateSelected = event;
+        console.log("New date selected is ", this.dateSelected.format(this.DATE_FORMAT));
     }
     
     private retrieveRatesFromService(): void {
-        this.ratesService.retrieveRates().then(
+        this.ratesService.retrieveRates(this.dateSelected.format(this.DATE_FORMAT)).then(
            data => {
                this.rates = data;
                this.error = null;
