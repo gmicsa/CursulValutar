@@ -31,6 +31,7 @@ xsi:schemaLocation="http://appengine.google.com/ns/1.0 http://googleappengine.go
         <include path="/html/**" />
         <include path="/img/**" />
         <include path="/locales/**" />
+        <include path="/fonts/**" />
 
     </static-files>
 
