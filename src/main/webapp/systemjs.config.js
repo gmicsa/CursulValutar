@@ -10,8 +10,6 @@
         },
         // map tells the System loader where to look for things
         map: {
-            // folder with ts source files is in 'app'
-            app: 'app',
             // angular bundles
             '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
             '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
@@ -24,7 +22,8 @@
             // other libraries
             'rxjs': 'npm:rxjs',
             'moment': 'npm:moment',
-            'ng2-datepicker': 'npm:ng2-datepicker/bundle/ng2-datepicker.umd.js'
+            'ng2-datepicker': 'npm:ng2-datepicker',
+            'ng2-select': 'npm:ng2-select'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -32,8 +31,8 @@
               format: 'register',
               defaultExtension: 'js'  
             },
-            app: {
-                main: './js-out/main',
+            'app': {
+                main: './js-out/app/main',
                 defaultExtension: 'js'
             },
             rxjs: {
@@ -41,6 +40,14 @@
             },
             'moment': {
                 main: 'moment',
+                defaultExtension: 'js'
+            },
+            'ng2-datepicker': {
+                main: 'ng2-datepicker',
+                defaultExtension: 'js'
+            },
+            'ng2-select': {
+                main: 'ng2-select',
                 defaultExtension: 'js'
             }
         }
