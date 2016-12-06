@@ -3,12 +3,13 @@
 <br><br>
 <div>
     <div>Select date:</div>
-    <datepicker-ionic class="datepicker" singleSelect expanded="true" [displayDate]="dateSelected"
-                      viewFormat="YYYY-MM-DD" (onDateChange)="dateChangedEvent($event)"></datepicker-ionic>
+    <datepicker class="datepicker" [expanded]="true" ([ngModel])="dateSelected"
+                      viewFormat="YYYY-MM-DD" (onDateChange)="dateChangedEvent($event)"></datepicker>
 </div>
 <br>
 <div>
     <div>Select currency:</div>
+    <ng-select [items]="currencyTypes" (selected)="currencyChangedEvent($event)"></ng-select>
 </div>
 <div *ngIf="!error">
     <table class="table table-striped">
