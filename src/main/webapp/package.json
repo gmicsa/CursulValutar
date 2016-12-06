@@ -5,8 +5,7 @@
   "main": "index.html",
   "scripts": {
     "postinstall": "typings install",
-    "build": "tsc -p ./app",
-    "tsc": "tsc --outDir ./js-out",
+    "tsc": "tsc --outDir ./exchangeservice/js-out",
     "typings": "typings"
   },
   "keywords": [

@@ -10,6 +10,8 @@
         },
         // map tells the System loader where to look for things
         map: {
+            // first the exchange service component
+            exchangeservice: 'exchangeservice',
             // angular bundles
             '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
             '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
@@ -31,8 +33,8 @@
               format: 'register',
               defaultExtension: 'js'  
             },
-            'app': {
-                main: './js-out/app/main',
+            exchangeservice: {
+                main: './js-out/exchangeservice/main',
                 defaultExtension: 'js'
             },
             rxjs: {
