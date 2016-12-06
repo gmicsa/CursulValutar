@@ -1,4 +1,6 @@
 .idea
 src/main/webapp/node_modules
 src/main/webapp/typings*
+src/main/webapp/js-out*
 *.iml
+target*
