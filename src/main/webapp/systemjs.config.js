@@ -3,45 +3,63 @@
  * Adjust as necessary for your application needs.
  */
 (function (global) {
-    System.config({
-        paths: {
-            // paths serve as alias
-            'npm:': 'node_modules/'
+    var pathToNpm = {
+        'npm:': 'node_modules/'
+    };
+    var map = {
+        exchangeservice: 'exchangeservice',
+        // angular libraries
+        '@angular': 'npm:@angular',
+        'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
+        // other libraries
+        'ng2-bootstrap/ng2-bootstrap': 'npm:ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
+        'rxjs': 'npm:rxjs',
+        'moment': 'npm:moment/moment.js'
+    };
+    var packages = {
+        exchangeservice: {
+            main: './js-out/exchangeservice/main',
+            defaultExtension: 'js'
         },
-        // map tells the System loader where to look for things
-        map: {
-            // first the exchange service component
-            exchangeservice: 'exchangeservice',
-            // angular bundles
-            '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
-            '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
-            '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
-            '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
-            '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-            '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
-            '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
-            '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
-            // other libraries
-            'rxjs': 'npm:rxjs',
-            'moment': 'npm:moment'
+        rxjs: {
+            defaultExtension: 'js'
         },
-        // packages tells the System loader how to load when no filename and/or no extension
-        packages: {
-            js: {
-              format: 'register',
-              defaultExtension: 'js'  
-            },
-            exchangeservice: {
-                main: './js-out/exchangeservice/main',
-                defaultExtension: 'js'
-            },
-            rxjs: {
-                defaultExtension: 'js'
-            },
-            'moment': {
-                main: 'moment',
-                defaultExtension: 'js'
-            }
+        'angular2-in-memory-web-api': {
+            main: 'index',
+            defaultExtension: 'js'
         }
+    };
+    var ngPackageNames = [
+      'common',
+      'compiler',
+      'core',
+      'forms',
+      'http',
+      'platform-browser',
+      'platform-browser-dynamic',
+      'router',
+      'upgrade'
+    ];
+
+    // packages for Karma environments
+    function packIndex(packageName) {
+        packages['@angular/' + packageName] = { main: 'index', defaultExtension: 'js' };
+    }
+
+    // packages for UMD environments
+    function packUmd(packageName) {
+        packages['@angular/' + packageName] = { main: '/bundles/' + packageName + '.umd', defaultExtension: 'js' };
+    }
+
+    var setPackageConfiguration = System.packageWithIndex ? packIndex : packUmd;
+    // add package entries for angular packages
+    ngPackageNames.forEach(setPackageConfiguration);
+
+    System.config({
+        paths: pathToNpm,
+        // map tells the System loader where to look for things
+        map: map,
+        // packages tells the System loader how to load when no filename and/or no extension
+        packages: packages
     });
 })(this);
