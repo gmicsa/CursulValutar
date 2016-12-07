@@ -12,11 +12,14 @@ import {Rate} from "./rate";
 export class ExchangeServiceComponent extends OnInit {
     readonly BNR_BANK_NAME = 'BNR';
     readonly DATE_FORMAT = "YYYY-MM-DD";
+    readonly MIN_DATE_STRING = "2012-03-01";
     
     public currencyTypes: Array<string> = ['EUR', 'USD', 'CHF', 'GBP', 'AUD', 'DKK', 'HUF', 'JPY', 'NOK', 'SEK'];
+    private minDate: Date = moment(this.MIN_DATE_STRING, this.DATE_FORMAT).toDate();
+    private maxDate: Date = moment().toDate();
 
-    dateSelected: moment.Moment;
-    currencySelected: string;
+    private dateSelected: Date;
+    private currencySelected: string;
     
     rates: Rate[];
     bnrReferenceRate: Rate;
@@ -28,19 +31,14 @@ export class ExchangeServiceComponent extends OnInit {
     }
     
     ngOnInit(): void {
-        this.dateSelected = moment(new Date());
-        this.currencySelected = 'EUR';
+        this.dateSelected = new Date();
+        this.currencySelected = "EUR";
         console.log("Current date is ", this.dateSelected.format(this.DATE_FORMAT));
         this.retrieveRatesFromService();
     }
 
     public currencyChangedEvent(event: string) {
         this.currencySelected = event;
-    }
-    
-    public dateChangedEvent(event: moment.Moment) {
-        this.dateSelected = event;
-        console.log("New date selected is ", this.dateSelected.format(this.DATE_FORMAT));
     }
     
     private retrieveRatesFromService(): void {
