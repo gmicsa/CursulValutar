@@ -7,13 +7,7 @@ import {Rate} from "./rate";
 @Component({
     selector: 'exchange-service',
     templateUrl: 'html/exchangerates.html',
-    providers: [RatesService],
-    styles: [`
-    datepicker-ionic {
-      display: inline-block;
-      margin-left: 150px;
-    }
-  `]
+    providers: [RatesService]
 })
 export class ExchangeServiceComponent extends OnInit {
     readonly BNR_BANK_NAME = 'BNR';
