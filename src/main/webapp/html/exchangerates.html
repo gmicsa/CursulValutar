@@ -3,8 +3,9 @@
 <br><br>
 <div>
     <div>Select date:</div>
-    <!--<datepicker class="datepicker" [expanded]="true" ([ngModel])="dateSelected"
-                      [viewFormat]="YYYY-MM-DD" (onDateChange)="dateChangedEvent($event)"></datepicker> -->
+    <div style="display: inline-block; min-height: 290px;">
+        <datepicker class="datepicker" [minDate]="minDate" [maxDate]="today" [(ngModel)]="dateSelected"></datepicker>
+    </div>
 </div>
 <br>
 <div>
