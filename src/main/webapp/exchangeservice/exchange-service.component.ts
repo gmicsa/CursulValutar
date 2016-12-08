@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {RatesService} from "./exchange-service.service";
 import {AggregatedRate} from "./aggregated-rate";
-import * as moment from 'moment';
+import * as moment from "moment";
 import {Rate} from "./rate";
 
 @Component({

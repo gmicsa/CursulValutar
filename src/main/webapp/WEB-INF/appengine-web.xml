@@ -11,17 +11,11 @@ xsi:schemaLocation="http://appengine.google.com/ns/1.0 http://googleappengine.go
     <threadsafe>true</threadsafe>
     
     <static-files>
-        <!-- include CSS files -->
-        <include path="/node_modules/bootstrap/dist/css/**" />
-        <include path="/css/**.css" />
-
         <!-- include JS configuration file -->
         <include path="/systemjs.config.js" />
-
         <!-- include JS script files from npm modules -->
         <include path="/node_modules/**.js" />
         <include path="/node_modules/**.js.map" />
-
         <!-- include typescript files and transpiled files from exchange service component folder-->
         <include path="/exchangeservice/**" />
 
@@ -30,6 +24,13 @@ xsi:schemaLocation="http://appengine.google.com/ns/1.0 http://googleappengine.go
         <include path="/img/**" />
         <include path="/locales/**" />
         <include path="/fonts/**" />
+        <!-- include CSS files -->
+        <include path="/node_modules/bootstrap/dist/css/**" />
+        <include path="/css/**.css" />
+        <!-- include bootstrap fonts -->
+        <include path="/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" />
+        <include path="/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" />
+        <include path="/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" />
 
     </static-files>
 

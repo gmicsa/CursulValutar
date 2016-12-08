@@ -10,7 +10,14 @@
 <br>
 <div>
     <div>Select currency:</div>
-    <!-- <ng-select [items]="currencyTypes" (selected)="currencyChangedEvent($event)"></ng-select> -->
+    <div class="dropdown" dropdown>
+        <button class="btn btn-primary" dropdown-open>EUR</button>
+        <ul class="dropdown-menu">
+            <li><a href="#">EUR</a></li>
+            <li><a href="#">Sadman</a></li>
+            <li><a href="#">Lieman</a></li>
+        </ul>
+    </div>
 </div>
 <div *ngIf="!error">
     <table class="table table-striped">

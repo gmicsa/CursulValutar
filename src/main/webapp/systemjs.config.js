@@ -13,6 +13,7 @@
         'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
         // other libraries
         'ng2-bootstrap/ng2-bootstrap': 'npm:ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
+        'ng2-dropdown': 'npm:ng2-dropdown',
         'rxjs': 'npm:rxjs',
         'moment': 'npm:moment/moment.js'
     };
@@ -25,6 +26,10 @@
             defaultExtension: 'js'
         },
         'angular2-in-memory-web-api': {
+            main: 'index',
+            defaultExtension: 'js'
+        },
+        'ng2-dropdown': {
             main: 'index',
             defaultExtension: 'js'
         }
