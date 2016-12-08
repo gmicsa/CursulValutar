@@ -10,13 +10,13 @@ import {Rate} from "./rate";
     providers: [RatesService]
 })
 export class ExchangeServiceComponent extends OnInit {
-    readonly BNR_BANK_NAME = 'BNR';
+    readonly BNR_BANK_NAME = "BNR";
     readonly DATE_FORMAT = "YYYY-MM-DD";
     readonly MIN_DATE_STRING = "2012-03-01";
     
     public currencyTypes: Array<string> = ['EUR', 'USD', 'CHF', 'GBP', 'AUD', 'DKK', 'HUF', 'JPY', 'NOK', 'SEK'];
     private minDate: Date = moment(this.MIN_DATE_STRING, this.DATE_FORMAT).toDate();
-    private maxDate: Date = moment().toDate();
+    private maxDate: Date = moment().format(this.DATE_FORMAT).toDate();
 
     private dateSelected: Date;
     private currencySelected: string;
@@ -64,17 +64,22 @@ export class ExchangeServiceComponent extends OnInit {
             }
         });
         this.aggregatedRates = [];
-        bankNames.forEach((bankName) => {
-            this.addAggregatedRateForBankName(bankName);
-        });
+        bankNames.forEach((bankName) => { this.addAggregatedRateForBankName(bankName); });
     }
 
     private addAggregatedRateForBankName(bankName) {
         if(bankName === this.BNR_BANK_NAME) {
             this.bnrReferenceRate = this.findBnrReferenceRate();
         } else {
-            this.aggregatedRates.push(new AggregatedRate(this.findRateWithBankAndTransactionType(bankName, 'BUY'),
-                this.findRateWithBankAndTransactionType(bankName, 'SELL')));
+            this.addAggregatedRateIfBuyAndSellRateAvailable(bankName);
+        }
+    }
+
+    private addAggregatedRateIfBuyAndSellRateAvailable(bankName) {
+        var buyRate = this.findRateWithBankAndTransactionType(bankName, 'BUY');
+        var sellRate = this.findRateWithBankAndTransactionType(bankName, 'SELL');
+        if(buyRate && sellRate) {
+            this.aggregatedRates.push(new AggregatedRate(buyRate, sellRate));
         }
     }
 
