@@ -18,7 +18,7 @@
     };
     var packages = {
         exchangeservice: {
-            main: './js-out/exchangeservice/main',
+            main: './js-out/main',
             defaultExtension: 'js'
         },
         rxjs: {
