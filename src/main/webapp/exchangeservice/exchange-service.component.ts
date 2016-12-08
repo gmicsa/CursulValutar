@@ -33,7 +33,7 @@ export class ExchangeServiceComponent extends OnInit {
     ngOnInit(): void {
         this.dateSelected = new Date();
         this.currencySelected = "EUR";
-        console.log("Current date is ", this.dateSelected.format(this.DATE_FORMAT));
+        console.log("Current date is ", this.formatDate(this.dateSelected));
         this.retrieveRatesFromService();
     }
 
@@ -42,7 +42,7 @@ export class ExchangeServiceComponent extends OnInit {
     }
     
     private retrieveRatesFromService(): void {
-        this.ratesService.retrieveRates(this.dateSelected.format(this.DATE_FORMAT), this.currencySelected).then(
+        this.ratesService.retrieveRates(this.formatDate(this.dateSelected), this.currencySelected).then(
            data => {
                this.rates = data;
                this.error = null;
@@ -89,4 +89,9 @@ export class ExchangeServiceComponent extends OnInit {
     private findBnrReferenceRate() {
         return this.rates.find(rate => rate.bankName === this.BNR_BANK_NAME && rate.transactionType === 'REF');
     }
+
+    private formatDate(date: Date): string {
+        return moment(date).format(this.DATE_FORMAT).toString();
+    }
+
 }
