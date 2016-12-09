@@ -64,7 +64,7 @@ export class ExchangeServiceComponent extends OnInit {
     }
 
     private addAggregatedRateForBankName(bankName) {
-        if(bankName === this.BNR_BANK_NAME) {
+        if(bankName === ExchangeServiceUtils.BNR_BANK_NAME) {
             this.bnrReferenceRate = this.findBnrReferenceRate();
         } else {
             this.addAggregatedRateIfBuyAndSellRateAvailable(bankName);
@@ -84,7 +84,7 @@ export class ExchangeServiceComponent extends OnInit {
     }
 
     private findBnrReferenceRate() {
-        return this.rates.find(rate => rate.bankName === this.BNR_BANK_NAME && rate.transactionType === 'REF');
+        return this.rates.find(rate => rate.bankName === ExchangeServiceUtils.BNR_BANK_NAME && rate.transactionType === 'REF');
     }
 
 }
