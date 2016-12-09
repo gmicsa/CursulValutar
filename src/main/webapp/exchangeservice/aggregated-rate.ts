@@ -1,4 +1,5 @@
 import {Rate} from "./rate";
+import {ExchangeServiceUtils} from "./exchange-service.utils";
 
 /**
  * Created by alexands on 02.12.2016.
@@ -28,26 +29,14 @@ export class AggregatedRate {
 
     private computeAggregatedBuyRateValues(rate:Rate) {
         this.buyValue = rate.value.toFixed(4);
-        this.buyVariance = this.convertNumberToSignedStringNumber(rate.evolution);
-        this.buyPercentVariance = this.convertNumberToSignedStringNumber(this.computeVariance(rate.value, rate.evolution));
+        this.buyVariance = ExchangeServiceUtils.convertNumberToSignedStringNumber(rate.evolution);
+        this.buyPercentVariance = ExchangeServiceUtils.convertNumberToSignedStringNumber(ExchangeServiceUtils.computeVariance(rate.value, rate.evolution));
     }
 
     private computeAggregatedSellRateValues(rate:Rate) {
         this.sellValue = rate.value.toFixed(4);
         this.sellVariance = this.convertNumberToSignedStringNumber(rate.evolution);
-        this.sellPercentVariance = this.convertNumberToSignedStringNumber(this.computeVariance(rate.value, rate.evolution));
+        this.sellPercentVariance = this.convertNumberToSignedStringNumber(ExchangeServiceUtils.computeVariance(rate.value, rate.evolution));
     }
 
-    private convertNumberToSignedStringNumber(aNumber: number): string
-    {
-        if(aNumber > 0){
-            return "+" + aNumber.toFixed(4);
-        }else{
-            return aNumber.toFixed(4);
-        }
-    }
-
-    private computeVariance(value: number, evolution: number) {
-        return (100 * evolution / (value - evolution));
-    }
 }
