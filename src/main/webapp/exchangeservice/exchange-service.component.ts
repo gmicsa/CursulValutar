@@ -7,7 +7,8 @@ import {Rate} from "./rate";
 @Component({
     selector: 'exchange-service',
     templateUrl: 'html/exchangerates.html',
-    providers: [RatesService]
+    providers: [RatesService],
+    styleUrls: [ 'css/exchangerates.css' ]
 })
 export class ExchangeServiceComponent extends OnInit {
     public currencyTypes: Array<string> = ExchangeServiceUtils.getCurrencyTypes();
@@ -33,10 +34,6 @@ export class ExchangeServiceComponent extends OnInit {
         this.retrieveRatesFromService();
     }
 
-    public currencyChangedEvent(event: string) {
-        this.currencySelected = event;
-    }
-    
     private retrieveRatesFromService(): void {
         this.ratesService.retrieveRates(ExchangeServiceUtils.formatDate(this.dateSelected), this.currencySelected).then(
            data => {
@@ -85,6 +82,15 @@ export class ExchangeServiceComponent extends OnInit {
 
     private findBnrReferenceRate() {
         return this.rates.find(rate => rate.bankName === ExchangeServiceUtils.BNR_BANK_NAME && rate.transactionType === 'REF');
+    }
+    
+    private computeBnrVariance(): string {
+        return this.bnrReferenceRate ? ExchangeServiceUtils.convertNumberToSignedStringNumber(this.bnrReferenceRate.evolution) : "";
+    }
+    
+    private computeBnrPercentVariance(): string {
+        return this.bnrReferenceRate ? ExchangeServiceUtils.convertNumberToSignedStringNumber(
+            ExchangeServiceUtils.computeVariance(this.bnrReferenceRate.value, this.bnrReferenceRate.evolution)) : "";
     }
 
 }
