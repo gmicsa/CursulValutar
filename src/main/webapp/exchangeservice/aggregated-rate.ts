@@ -35,8 +35,8 @@ export class AggregatedRate {
 
     private computeAggregatedSellRateValues(rate:Rate) {
         this.sellValue = rate.value.toFixed(4);
-        this.sellVariance = this.convertNumberToSignedStringNumber(rate.evolution);
-        this.sellPercentVariance = this.convertNumberToSignedStringNumber(ExchangeServiceUtils.computeVariance(rate.value, rate.evolution));
+        this.sellVariance = ExchangeServiceUtils.convertNumberToSignedStringNumber(rate.evolution);
+        this.sellPercentVariance = ExchangeServiceUtils.convertNumberToSignedStringNumber(ExchangeServiceUtils.computeVariance(rate.value, rate.evolution));
     }
 
 }
