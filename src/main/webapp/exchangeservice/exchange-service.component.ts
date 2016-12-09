@@ -93,4 +93,8 @@ export class ExchangeServiceComponent extends OnInit {
             ExchangeServiceUtils.computeVariance(this.bnrReferenceRate.value, this.bnrReferenceRate.evolution)) : "";
     }
 
+    private computeBnrValue(): number {
+        return this.bnrReferenceRate ? this.bnrReferenceRate.value : 0;
+    }
+
 }
