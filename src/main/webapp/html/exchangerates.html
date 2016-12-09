@@ -22,7 +22,9 @@
     </div>
 </div>
 <br>
-<h2>BNR Reference rate: {{bnrReferenceRate.value}}</h2>
+<h2>BNR Reference rate: {{bnrReferenceRate.value}} </h2>
+    <span class="greenSmall">{{computeBnrVariance}}</span>
+    <span class="greenSmall">{{computeBnrPercentVariance}}</span>
 <div *ngIf="!error">
     <table class="table table-striped">
         <thead>
