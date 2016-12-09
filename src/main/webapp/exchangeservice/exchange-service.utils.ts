@@ -4,9 +4,9 @@
 import * as moment from "moment";
     
 export class ExchangeServiceUtils {
-    readonly static BNR_BANK_NAME = "BNR";
-    readonly static DATE_FORMAT = "YYYY-MM-DD";
-    readonly static MIN_DATE_STRING = "2012-03-01";
+    static readonly BNR_BANK_NAME = "BNR";
+    static readonly DATE_FORMAT = "YYYY-MM-DD";
+    static readonly MIN_DATE_STRING = "2012-03-01";
     
     static getMinimumDateForExchanges(): Date {
         return moment(ExchangeServiceUtils.MIN_DATE_STRING, ExchangeServiceUtils.DATE_FORMAT).toDate();
