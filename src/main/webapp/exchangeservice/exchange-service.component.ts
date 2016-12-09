@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {RatesService} from "./exchange-service.service";
+import {ExchangeServiceUtils} from "./exchange-service.utils";
 import {AggregatedRate} from "./aggregated-rate";
-import * as moment from "moment";
 import {Rate} from "./rate";
 
 @Component({
@@ -10,17 +10,13 @@ import {Rate} from "./rate";
     providers: [RatesService]
 })
 export class ExchangeServiceComponent extends OnInit {
-    readonly BNR_BANK_NAME = "BNR";
-    readonly DATE_FORMAT = "YYYY-MM-DD";
-    readonly MIN_DATE_STRING = "2012-03-01";
-    
-    public currencyTypes: Array<string> = ['EUR', 'USD', 'CHF', 'GBP', 'AUD', 'DKK', 'HUF', 'JPY', 'NOK', 'SEK'];
-    private minDate: Date = moment(this.MIN_DATE_STRING, this.DATE_FORMAT).toDate();
-    private maxDate: Date = moment().format(this.DATE_FORMAT).toDate();
+    public currencyTypes: Array<string> = ExchangeServiceUtils.getCurrencyTypes();
+    private minDate: Date = ExchangeServiceUtils.getMinimumDateForExchanges();
+    private maxDate: Date = ExchangeServiceUtils.getMaximumDateForExchanges();
 
     private dateSelected: Date;
     private currencySelected: string;
-    
+
     rates: Rate[];
     bnrReferenceRate: Rate;
     aggregatedRates: AggregatedRate[];
@@ -33,7 +29,7 @@ export class ExchangeServiceComponent extends OnInit {
     ngOnInit(): void {
         this.dateSelected = new Date();
         this.currencySelected = "EUR";
-        console.log("Current date is ", this.formatDate(this.dateSelected));
+        console.log("Current date is ", ExchangeServiceUtils.formatDate(this.dateSelected));
         this.retrieveRatesFromService();
     }
 
@@ -42,7 +38,7 @@ export class ExchangeServiceComponent extends OnInit {
     }
     
     private retrieveRatesFromService(): void {
-        this.ratesService.retrieveRates(this.formatDate(this.dateSelected), this.currencySelected).then(
+        this.ratesService.retrieveRates(ExchangeServiceUtils.formatDate(this.dateSelected), this.currencySelected).then(
            data => {
                this.rates = data;
                this.error = null;
@@ -59,7 +55,7 @@ export class ExchangeServiceComponent extends OnInit {
     private computeAggregatedRates(): void {
         var bankNames: string[] = [];
         this.rates.forEach((rate) => {
-            if(this.isNewElement(rate.bankName, bankNames)) {
+            if(ExchangeServiceUtils.isNewElement(rate.bankName, bankNames)) {
                 bankNames.push(rate.bankName);
             }
         });
@@ -82,21 +78,13 @@ export class ExchangeServiceComponent extends OnInit {
             this.aggregatedRates.push(new AggregatedRate(buyRate, sellRate));
         }
     }
-
-    private isNewElement(element: string, arrayOfElements: string[]) {
-        return arrayOfElements.find(item => item === element) === undefined;
-    }
-
+    
     private findRateWithBankAndTransactionType(bankName: string, transactionType: string): Rate {
         return this.rates.find(rate => rate.bankName === bankName && rate.transactionType === transactionType);
     }
 
     private findBnrReferenceRate() {
         return this.rates.find(rate => rate.bankName === this.BNR_BANK_NAME && rate.transactionType === 'REF');
-    }
-
-    private formatDate(date: Date): string {
-        return moment(date).format(this.DATE_FORMAT).toString();
     }
 
 }
