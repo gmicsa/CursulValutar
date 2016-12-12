@@ -6,7 +6,51 @@ import {Rate} from "./rate";
 
 @Component({
     selector: 'exchange-service',
-    templateUrl: 'html/exchangerates.html',
+    template: `<div>
+    <div>Select date:</div>
+    <div style="display: inline-block; min-height: 290px;">
+        <datepicker class="datepicker" [minDate]="minDate" [maxDate]="maxDate" [(ngModel)]="dateSelected"></datepicker>
+    </div>
+</div>
+<div>
+    <div>Select currency:</div>
+    <!-- Single button -->
+    <div class="btn-group" dropdown >
+        <button id="single-button" type="button" class="btn btn-primary" dropdownToggle>
+            {{currencySelected}} <span class="caret"></span>
+        </button>
+        <ul dropdownMenu role="menu" aria-labelledby="single-button">
+            <li *ngFor="let currency of currencyTypes">
+                <a class="dropdown-item" href="#">{{currency}}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<br>
+<h2>BNR Reference rate: {{computeBnrValue()}} <span class="greenSmall">{{computeBnrVariance()}}</span> <span class="greenSmall">{{computeBnrPercentVariance()}}</span></h2>
+<div *ngIf="!error">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 40%">Bank</th>
+            <th style="width: 20%">Buy rate</th>
+            <th style="width: 20%">Sell rate</th>
+            <th style="width: 20%">Last update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let aggregateRate of aggregatedRates">
+            <td class="text-right">{{aggregateRate.bankName}}</td>
+            <td>{{aggregateRate.buyValue}} <span class="greenSmall">{{aggregateRate.buyVariance}}</span> <span class="greenSmall">{{aggregateRate.buyPercentVariance}}</span></td>
+            <td>{{aggregateRate.sellValue}} <span class="greenSmall">{{aggregateRate.sellVariance}}</span> <span class="greenSmall">{{aggregateRate.sellPercentVariance}}</span></td>
+            <td>{{aggregateRate.lastChangedAt}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="error">
+    Error is {{this.error}}
+</div>`,
     providers: [RatesService],
     styleUrls: [ 'css/exchangerates.css' ]
 })
