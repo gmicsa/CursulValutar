@@ -1,6 +1,3 @@
-<h1>CursRapid.ro</h1>
-<div>Afli rapid cursul</div>
-<br>
 <div>
     <div>Select date:</div>
     <div style="display: inline-block; min-height: 290px;">
@@ -22,9 +19,7 @@
     </div>
 </div>
 <br>
-<h2>BNR Reference rate: {{computeBnrValue}} </h2>
-    <span class="greenSmall">{{computeBnrVariance}}</span>
-    <span class="greenSmall">{{computeBnrPercentVariance}}</span>
+<h2>BNR Reference rate: {{computeBnrValue()}} <span class="greenSmall">{{computeBnrVariance()}}</span> <span class="greenSmall">{{computeBnrPercentVariance()}}</span></h2>
 <div *ngIf="!error">
     <table class="table table-striped">
         <thead>
@@ -38,8 +33,8 @@
         <tbody>
         <tr *ngFor="let aggregateRate of aggregatedRates">
             <td class="text-right">{{aggregateRate.bankName}}</td>
-            <td>{{aggregateRate.buyValue}} {{aggregateRate.buyVariance}} {{aggregateRate.buyPercentVariance}}</td>
-            <td>{{aggregateRate.sellValue}} {{aggregateRate.sellVariance}} {{aggregateRate.sellPercentVariance}}</td>
+            <td>{{aggregateRate.buyValue}} <span class="greenSmall">{{aggregateRate.buyVariance}}</span> <span class="greenSmall">{{aggregateRate.buyPercentVariance}}</span></td>
+            <td>{{aggregateRate.sellValue}} <span class="greenSmall">{{aggregateRate.sellVariance}}</span> <span class="greenSmall">{{aggregateRate.sellPercentVariance}}</span></td>
             <td>{{aggregateRate.lastChangedAt}}</td>
         </tr>
         </tbody>
