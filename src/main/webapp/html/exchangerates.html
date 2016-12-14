@@ -5,18 +5,22 @@
     </div>
 </div>
 <div>
-    <div>Select currency:</div>
+    <div>Select currency: </div>
     <!-- Single button -->
     <div class="btn-group" dropdown >
         <button id="single-button" type="button" class="btn btn-primary" dropdownToggle>
             {{currencySelected}} <span class="caret"></span>
         </button>
         <ul dropdownMenu role="menu" aria-labelledby="single-button">
-            <li *ngFor="let currency of currencyTypes">
-                <a class="dropdown-item" href="#">{{currency}}</a>
+            <li *ngFor="let currency of currencyTypes" >
+                <a class="dropdown-item" #currencyElement (click)="currencyChanged(currencyElement)">{{currency}}</a>
             </li>
         </ul>
     </div>
+</div>
+<br>
+<div>
+    <button type="button" class="btn btn-primary btn-sm" (click)="retrieveRatesFromService()">Show rates</button>
 </div>
 <br>
 <h2>BNR Reference rate: {{computeBnrValue()}} <span class="greenSmall">{{computeBnrVariance()}}</span> <span class="greenSmall">{{computeBnrPercentVariance()}}</span></h2>
@@ -41,5 +45,5 @@
     </table>
 </div>
 <div *ngIf="error">
-    Error is {{this.error}}
+    Error occurred while trying to get rates: {{error}}
 </div>
