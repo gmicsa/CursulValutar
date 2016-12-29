@@ -1,13 +1,14 @@
-<div>
-    <div>Select date:</div>
-    <div style="display: inline-block; min-height: 290px;">
-        <datepicker class="datepicker" [minDate]="minDate" [maxDate]="maxDate" [(ngModel)]="dateSelected"></datepicker>
+<br><div class="row">
+    <div class="col-md-1 text-right">Select date: </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary"
+                (click)="isCollapsed = !isCollapsed">{{getDateFormatted()}}</button>
+        <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
+            <datepicker class="datepicker" [minDate]="minDate" [maxDate]="maxDate" [(ngModel)]="dateSelected"></datepicker>
+        </div>
     </div>
-</div>
-<div>
-    <div>Select currency: </div>
-    <!-- Single button -->
-    <div class="btn-group" dropdown >
+    <div class="col-md-1 text-right">Select currency: </div>
+    <div class="col-md-1 btn-group" dropdown >
         <button id="single-button" type="button" class="btn btn-primary" dropdownToggle>
             {{currencySelected}} <span class="caret"></span>
         </button>
@@ -37,8 +38,8 @@
         <tbody>
         <tr *ngFor="let aggregateRate of aggregatedRates">
             <td class="text-right">{{aggregateRate.bankName}}</td>
-            <td>{{aggregateRate.buyValue}} <span class="greenSmall">{{aggregateRate.buyVariance}}</span> <span class="greenSmall">{{aggregateRate.buyPercentVariance}}</span></td>
-            <td>{{aggregateRate.sellValue}} <span class="greenSmall">{{aggregateRate.sellVariance}}</span> <span class="greenSmall">{{aggregateRate.sellPercentVariance}}</span></td>
+            <td>{{aggregateRate.buyValue}} <span class="{{aggregateRate.buyClassForCssLayout}}">{{aggregateRate.buyVariance}} {{aggregateRate.buyPercentVariance}}</span></td>
+            <td>{{aggregateRate.sellValue}} <span class="{{aggregateRate.sellClassForCssLayout}}">{{aggregateRate.sellVariance}} {{aggregateRate.sellPercentVariance}}</span></td>
             <td>{{aggregateRate.lastChangedAt}}</td>
         </tr>
         </tbody>
