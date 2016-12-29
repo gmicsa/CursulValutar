@@ -16,6 +16,7 @@ export class ExchangeServiceComponent extends OnInit {
     private maxDate: Date = ExchangeServiceUtils.getMaximumDateForExchanges();
 
     private dateSelected: Date;
+    private isCollapsed:boolean = true;
     private currencySelected: string;
 
     rates: Rate[];
@@ -30,8 +31,18 @@ export class ExchangeServiceComponent extends OnInit {
     ngOnInit(): void {
         this.dateSelected = new Date();
         this.currencySelected = "EUR";
-        console.log("Current date is ", ExchangeServiceUtils.formatDate(this.dateSelected));
+        console.log("Current date is ", this.getDateFormatted());
         this.retrieveRatesFromService();
+    }
+
+    public collapsed(event:any):void {
+    }
+
+    public expanded(event:any):void {
+    }
+
+    public getDateFormatted(): string {
+        return ExchangeServiceUtils.formatDate(this.dateSelected);
     }
 
     currencyChanged(currencyElement) {
@@ -39,7 +50,7 @@ export class ExchangeServiceComponent extends OnInit {
     }
 
     private retrieveRatesFromService(): void {
-        this.ratesService.retrieveRates(ExchangeServiceUtils.formatDate(this.dateSelected), this.currencySelected).then(
+        this.ratesService.retrieveRates(this.getDateFormatted(), this.currencySelected).then(
            data => {
                this.rates = data;
                this.error = null;
