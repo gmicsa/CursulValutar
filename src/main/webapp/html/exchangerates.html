@@ -1,13 +1,14 @@
-<br><div class="row">
-    <div class="col-md-1 text-right">Select date: </div>
-    <div class="col-md-3">
-        <button type="button" class="btn btn-primary"
-                (click)="isCollapsed = !isCollapsed">{{getDateFormatted()}}</button>
-        <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed">
+<br>
+<div class="row">
+    <div class="col-md-1 text-right"><h4>Select date: </h4></div>
+    <div class="col-md-2">
+        <input type="text" class="text-left" contenteditable="false"
+               (click)="showDatePicker = !showDatePicker" [(ngModel)]="dateSelected">{{getDateFormatted()}}</input>
+        <div *ngIf="showDatePicker">
             <datepicker class="datepicker" [minDate]="minDate" [maxDate]="maxDate" [(ngModel)]="dateSelected"></datepicker>
         </div>
     </div>
-    <div class="col-md-1 text-right">Select currency: </div>
+    <div class="col-md-1 text-right"><h4>Select currency: </h4></div>
     <div class="col-md-1 btn-group" dropdown >
         <button id="single-button" type="button" class="btn btn-primary" dropdownToggle>
             {{currencySelected}} <span class="caret"></span>
@@ -18,12 +19,11 @@
             </li>
         </ul>
     </div>
+    <div class="col-md-1">
+        <button type="button" class="btn btn-primary btn-sm" (click)="retrieveRatesFromService()">Show rates</button>
+    </div>
 </div>
-<br>
-<div>
-    <button type="button" class="btn btn-primary btn-sm" (click)="retrieveRatesFromService()">Show rates</button>
-</div>
-<br>
+<br><br>
 <h2>BNR Reference rate: {{computeBnrValue()}} <span class="greenSmall">{{computeBnrVariance()}}</span> <span class="greenSmall">{{computeBnrPercentVariance()}}</span></h2>
 <div *ngIf="!error">
     <table class="table table-striped">
