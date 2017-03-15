@@ -16,7 +16,7 @@ export class ExchangeServiceComponent extends OnInit {
     private maxDate: Date = ExchangeServiceUtils.getMaximumDateForExchanges();
 
     private dateSelected: Date;
-    private isCollapsed:boolean = true;
+    private showDatePicker:boolean = false;
     private currencySelected: string;
 
     rates: Rate[];
@@ -33,12 +33,6 @@ export class ExchangeServiceComponent extends OnInit {
         this.currencySelected = "EUR";
         console.log("Current date is ", this.getDateFormatted());
         this.retrieveRatesFromService();
-    }
-
-    public collapsed(event:any):void {
-    }
-
-    public expanded(event:any):void {
     }
 
     public getDateFormatted(): string {
