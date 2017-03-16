@@ -2,8 +2,7 @@
 <div class="row">
     <div class="col-md-1 text-right"><h4>Select date: </h4></div>
     <div class="col-md-2">
-        <input type="text" class="text-left" contenteditable="false"
-               (click)="showDatePicker = !showDatePicker" [(ngModel)]="dateSelected">{{getDateFormatted()}}</input>
+        <input type="text" class="text-left" readonly (click)="showDatePicker = !showDatePicker" value="{{getDateFormatted()}}">
         <div *ngIf="showDatePicker">
             <datepicker class="datepicker" [minDate]="minDate" [maxDate]="maxDate" [(ngModel)]="dateSelected"></datepicker>
         </div>
