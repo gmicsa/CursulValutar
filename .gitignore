@@ -1,6 +1,9 @@
 .idea
 src/main/webapp/node_modules
+src/main/webapp/v2/node_modules
 src/main/webapp/typings*
+src/main/webapp/v2/typings*
 src/main/webapp/exchangeservice/js-out*
+src/main/webapp/v2/exchangeservice/js-out*
 *.iml
 target*

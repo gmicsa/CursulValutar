@@ -17,17 +17,17 @@ xsi:schemaLocation="http://appengine.google.com/ns/1.0 http://googleappengine.go
         <include path="/node_modules/**.js" />
         <include path="/node_modules/**.js.map" />
         <!-- include typescript files and transpiled files from exchange service component folder-->
-        <include path="/exchangeservice/**.ts" />
-        <include path="/exchangeservice/js-out/**" />
+        <include path="/v2/exchangeservice/**.ts" />
+        <include path="/v2/exchangeservice/js-out/**" />
 
         <!-- include other resources: images, partial htmls and locales -->
-        <include path="/html/**" />
-        <include path="/img/**" />
-        <include path="/locales/**" />
-        <include path="/fonts/**" />
+        <include path="/v2/html/**" />
+        <include path="/v2/img/**" />
+        <include path="/v2/locales/**" />
+        <include path="/v2/fonts/**" />
         <!-- include CSS files -->
         <include path="/node_modules/bootstrap/dist/css/**" />
-        <include path="/css/**.css" />
+        <include path="/v2/css/**.css" />
         <!-- include bootstrap fonts -->
         <include path="/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" />
         <include path="/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" />

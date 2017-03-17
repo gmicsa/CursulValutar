@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "postinstall": "typings install",
-    "tsc": "tsc --outDir ./exchangeservice/js-out",
+    "tsc": "tsc --outDir ./v2/exchangeservice/js-out",
     "typings": "typings"
   },
   "keywords": [

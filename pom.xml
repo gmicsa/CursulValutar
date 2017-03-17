@@ -314,7 +314,7 @@
                         <id>exec-npm-run-tsc</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <workingDirectory>${project.basedir}/src/main/webapp/exchangeservice</workingDirectory>
+                            <workingDirectory>src/main/webapp/v2/exchangeservice</workingDirectory>
                             <executable>npm.cmd</executable>
                             <arguments>
                                 <argument>run</argument>

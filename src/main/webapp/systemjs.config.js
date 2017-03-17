@@ -4,7 +4,7 @@
  */
 (function (global) {
     var pathToNpm = {
-        'npm:': 'node_modules/'
+        'npm:': '../node_modules/'
     };
     var map = {
         exchangeservice: 'exchangeservice',
