@@ -8,7 +8,7 @@ import {Rate} from "./rate";
 
 @Injectable()
 export class RatesService {
-    private urlGetRates = 'services/rates';
+    private urlGetRates = '../services/rates';
     
     constructor(private http : Http) {
     }
