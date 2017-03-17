@@ -11,6 +11,16 @@ xsi:schemaLocation="http://appengine.google.com/ns/1.0 http://googleappengine.go
     <threadsafe>true</threadsafe>
     
     <static-files>
+
+        <!-- include files of the old JS solution -->
+        <include path="/css/**" />
+        <include path="/js/**" />
+        <include path="/html/**" />
+        <include path="/img/**" />
+        <include path="/locales/**" />
+
+
+        <!-- include files of the angular V2 solution -->
         <!-- include JS configuration file -->
         <include path="/systemjs.config.js" />
         <!-- include JS script files from npm modules -->
