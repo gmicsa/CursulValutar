@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.utils.DateUtils;
-import ro.micsa.exchange.utils.ExchangeRateHelper;
+import ro.micsa.exchange.utils.ExchangeRateFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,8 +61,8 @@ public class BancaCarpaticaDataRetriever implements BankDataRetriever {
                 continue;
             }
 
-            rates.add(ExchangeRateHelper.addBuyExchangeRate(currencyType, buyString, lastUpdateAsString));
-            rates.add(ExchangeRateHelper.addSellExchangeRate(currencyType, sellString, lastUpdateAsString));
+            rates.add(ExchangeRateFactory.createBuyExchangeRate(currencyType, buyString, lastUpdateAsString));
+            rates.add(ExchangeRateFactory.createSellExchangeRate(currencyType, sellString, lastUpdateAsString));
         }
         return rates;
     }

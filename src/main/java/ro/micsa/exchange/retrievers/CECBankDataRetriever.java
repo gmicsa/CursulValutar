@@ -7,16 +7,14 @@ package ro.micsa.exchange.retrievers;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.utils.DateUtils;
-import ro.micsa.exchange.utils.ExchangeRateHelper;
+import ro.micsa.exchange.utils.ExchangeRateFactory;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -61,8 +59,8 @@ public class CECBankDataRetriever implements BankDataRetriever {
                 continue;
             }
            
-            rates.add(ExchangeRateHelper.addBuyExchangeRate(currencyType, buyString, lastUpdateAsString));            
-            rates.add(ExchangeRateHelper.addSellExchangeRate(currencyType, sellString, lastUpdateAsString));
+            rates.add(ExchangeRateFactory.createBuyExchangeRate(currencyType, buyString, lastUpdateAsString));
+            rates.add(ExchangeRateFactory.createSellExchangeRate(currencyType, sellString, lastUpdateAsString));
         }
         
         return rates;

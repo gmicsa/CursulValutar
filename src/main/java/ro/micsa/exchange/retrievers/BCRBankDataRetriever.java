@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
-import ro.micsa.exchange.utils.ExchangeRateHelper;
+import ro.micsa.exchange.utils.ExchangeRateFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,8 +56,8 @@ public class BCRBankDataRetriever implements BankDataRetriever {
             String sellString = String.valueOf(exchangeRateObject.getDouble("sell"));
             Date lastModified = parseBCRDateText(exchangeRateObject.getString("lastModified"));
 
-            rates.add(ExchangeRateHelper.addBuyExchangeRate(currencyType, buyString, lastModified.toString()));
-            rates.add(ExchangeRateHelper.addSellExchangeRate(currencyType, sellString, lastModified.toString()));
+            rates.add(ExchangeRateFactory.createBuyExchangeRate(currencyType, buyString, lastModified.toString()));
+            rates.add(ExchangeRateFactory.createSellExchangeRate(currencyType, sellString, lastModified.toString()));
         }
 
         return rates;

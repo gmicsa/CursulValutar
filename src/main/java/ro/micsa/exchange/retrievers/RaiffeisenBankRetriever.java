@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.utils.DateUtils;
-import ro.micsa.exchange.utils.ExchangeRateHelper;
+import ro.micsa.exchange.utils.ExchangeRateFactory;
 
 import java.net.URL;
 import java.text.ParseException;
@@ -68,10 +68,10 @@ public class RaiffeisenBankRetriever implements BankDataRetriever {
             String currencyBuyValue = newElement.select("td:eq(3)").text();
 
             // buy rate
-            exchangeRates.add(ExchangeRateHelper.addBuyExchangeRate
+            exchangeRates.add(ExchangeRateFactory.createBuyExchangeRate
                     (currencyType, currencyBuyValue, lastUpdatedDateString));
             // sell rate
-            exchangeRates.add(ExchangeRateHelper.addSellExchangeRate
+            exchangeRates.add(ExchangeRateFactory.createSellExchangeRate
                     (currencyType, currencySellValue, lastUpdatedDateString));
         }
         

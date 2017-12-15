@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.utils.DateUtils;
-import ro.micsa.exchange.utils.ExchangeRateHelper;
+import ro.micsa.exchange.utils.ExchangeRateFactory;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -65,10 +65,10 @@ public class LibraBankRetriever implements BankDataRetriever {
             String currencyBuyValue = newElement.select("td:eq(1)").select("span").text().replace(',', '.');
             
             // buy rate
-            exchangeRates.add(ExchangeRateHelper.addBuyExchangeRate
+            exchangeRates.add(ExchangeRateFactory.createBuyExchangeRate
                     (currencyType, currencyBuyValue, lastUpdatedDateString));            
             // sell rate
-            exchangeRates.add(ExchangeRateHelper.addSellExchangeRate
+            exchangeRates.add(ExchangeRateFactory.createSellExchangeRate
                     (currencyType, currencySellValue, lastUpdatedDateString));
         }
         

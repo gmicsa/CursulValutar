@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.utils.DateUtils;
-import ro.micsa.exchange.utils.ExchangeRateHelper;
+import ro.micsa.exchange.utils.ExchangeRateFactory;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -55,8 +55,8 @@ public class CreditAgricoleDataRetriever implements BankDataRetriever {
             String currencyBuyValue = currencyElement.child(1).text();
             String currencySellValue = currencyElement.child(2).text();
             
-            rates.add(ExchangeRateHelper.addBuyExchangeRate(currencyType, currencyBuyValue, lastUpdateAsString));
-            rates.add(ExchangeRateHelper.addSellExchangeRate(currencyType, currencySellValue, lastUpdateAsString));
+            rates.add(ExchangeRateFactory.createBuyExchangeRate(currencyType, currencyBuyValue, lastUpdateAsString));
+            rates.add(ExchangeRateFactory.createSellExchangeRate(currencyType, currencySellValue, lastUpdateAsString));
         }
         return rates;
     }

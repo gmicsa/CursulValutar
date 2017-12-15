@@ -9,11 +9,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.utils.DateUtils;
-import ro.micsa.exchange.utils.ExchangeRateHelper;
+import ro.micsa.exchange.utils.ExchangeRateFactory;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -66,8 +65,8 @@ public class CityBankDataRetriever implements BankDataRetriever {
                 continue;
             }
 
-            ExchangeRate rateSell = ExchangeRateHelper.addSellExchangeRate(currencyType, sellString, lastUpdateAsString);
-            ExchangeRate rateBuy = ExchangeRateHelper.addBuyExchangeRate(currencyType, buyString, lastUpdateAsString);
+            ExchangeRate rateSell = ExchangeRateFactory.createSellExchangeRate(currencyType, sellString, lastUpdateAsString);
+            ExchangeRate rateBuy = ExchangeRateFactory.createBuyExchangeRate(currencyType, buyString, lastUpdateAsString);
          
             rates.add(rateSell);
             rates.add(rateBuy);

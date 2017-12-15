@@ -8,14 +8,12 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.utils.DateUtils;
-import ro.micsa.exchange.utils.ExchangeRateHelper;
+import ro.micsa.exchange.utils.ExchangeRateFactory;
 
-import java.net.URL;
 import java.util.*;
 
 /**
@@ -91,10 +89,10 @@ public class LeumiBankRetriever implements BankDataRetriever {
                     .select("div font b").text();
             
             if(buyType) {
-                exchangeRates.add(ExchangeRateHelper.addBuyExchangeRate
+                exchangeRates.add(ExchangeRateFactory.createBuyExchangeRate
                     (currencyType, currencyValue, lastUpdatedDateString));
             } else {
-                exchangeRates.add(ExchangeRateHelper.addSellExchangeRate
+                exchangeRates.add(ExchangeRateFactory.createSellExchangeRate
                     (currencyType, currencyValue, lastUpdatedDateString));
             }
             

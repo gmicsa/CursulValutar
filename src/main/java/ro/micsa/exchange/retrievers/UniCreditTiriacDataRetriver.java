@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import ro.micsa.exchange.dto.CurrencyType;
 import ro.micsa.exchange.dto.ExchangeRate;
 import ro.micsa.exchange.utils.DateUtils;
-import ro.micsa.exchange.utils.ExchangeRateHelper;
+import ro.micsa.exchange.utils.ExchangeRateFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -58,8 +58,8 @@ public class UniCreditTiriacDataRetriver implements BankDataRetriever {
 
             DateExchangeRates dateExchangeRates = currencyDateExchangeRates.get(currencyKey);
             String lastUpdateAsString = DateUtils.RO_SDF_HH_mm.format(dateExchangeRates.date);
-            exchangeRates.add(ExchangeRateHelper.addBuyExchangeRate(currencyType, dateExchangeRates.buyString, lastUpdateAsString));
-            exchangeRates.add(ExchangeRateHelper.addSellExchangeRate(currencyType, dateExchangeRates.sellString, lastUpdateAsString));
+            exchangeRates.add(ExchangeRateFactory.createBuyExchangeRate(currencyType, dateExchangeRates.buyString, lastUpdateAsString));
+            exchangeRates.add(ExchangeRateFactory.createSellExchangeRate(currencyType, dateExchangeRates.sellString, lastUpdateAsString));
         }
 
         return exchangeRates;
