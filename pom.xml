@@ -10,7 +10,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.2.18.RELEASE</spring.version>
+        <spring.version>4.3.19.RELEASE</spring.version>
         <jersey.version>2.27</jersey.version>
         <appengine.sdk.version>1.9.64</appengine.sdk.version>
         <datanucleus.jpa.version>5.1.0-release</datanucleus.jpa.version>
@@ -204,6 +204,10 @@
                 <exclusion>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-context</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
