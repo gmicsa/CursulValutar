@@ -10,9 +10,9 @@ import ro.micsa.exchange.model.EmailAlertEntity;
  */
 public interface EmailAlertDAO {
 
-    public String save(EmailAlertEntity entity);
+    String save(EmailAlertEntity entity);
 
-    public EmailAlertEntity getById(String id);
+    EmailAlertEntity getById(String id);
 
-    public void update(EmailAlertEntity emailAlertEntity);
+    void update(EmailAlertEntity emailAlertEntity);
 }
