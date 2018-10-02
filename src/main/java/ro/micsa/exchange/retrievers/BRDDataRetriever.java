@@ -22,9 +22,9 @@ import java.util.*;
  * @author Alex
  */
 @Component(value="BRDDataRetriver")
-public class BRDDataRetriver implements BankDataRetriever {
+public class BRDDataRetriever implements BankDataRetriever {
     
-    public static final String BRD_URL = "http://www.brd.ro/instrumente-utile/curs-valutar";
+    private static final String BRD_URL = "https://www.brd.ro/curs-valutar-si-dobanzi-de-referinta";
 
     @Override
     public String getBankName() {
@@ -33,33 +33,34 @@ public class BRDDataRetriver implements BankDataRetriever {
 
     @Override
     public List<ExchangeRate> getExchangeRates() throws Exception {
-        List<ExchangeRate> exchangeRates = new ArrayList<ExchangeRate>();
+        List<ExchangeRate> exchangeRates = new ArrayList<>();
         
         Document root = Jsoup.parse(new URL(BRD_URL), 2000);
-        Elements content = root.select("div.exchange-rates-table").select("table").select("tr:gt(1)");
+        Elements content = root.select("div#tabAccountExchangeRates").select("div.tabel");
+
+        Elements currencyCodes = content.select("div:eq(3)").select("p:gt(0)");
+        Iterator<Element> currencyBuyIterator = content.select("div:eq(5)").select("p:gt(0)").iterator();
+        Iterator<Element> currencySellIterator = content.select("div:eq(6)").select("p:gt(0)").iterator();
 
         // select line with last update date
         String lastUpdatedDateString = DateUtils.SDF_HH_mm.format(new Date());
 
-        Iterator<Element> currencyIterator = content.iterator();
-        while(currencyIterator.hasNext()) {
-            Element newElement = currencyIterator.next();
-            String currencyName = newElement.select("td:eq(1)").text();
-            CurrencyType currencyType = null;
+        for (Element newElement : currencyCodes) {
+            String currencyName = newElement.text();
+            String currencyBuyValue = currencyBuyIterator.next().text();
+            String currencySellValue = currencySellIterator.next().text();
+            CurrencyType currencyType;
 
             try {
                 currencyType = CurrencyType.valueOf(currencyName);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 continue;   // no problem, continue with next currency
             }
 
             // currency exist in enum, take values for buy and sell
-            String currencyBuyValue = newElement.select("td:eq(2)").text();
-            String currencySellValue = newElement.select("td:eq(3)").text();
-            
             // buy rate
             exchangeRates.add(ExchangeRateFactory.createBuyExchangeRate
-                    (currencyType, currencyBuyValue, lastUpdatedDateString));            
+                    (currencyType, currencyBuyValue, lastUpdatedDateString));
             // sell rate
             exchangeRates.add(ExchangeRateFactory.createSellExchangeRate
                     (currencyType, currencySellValue, lastUpdatedDateString));

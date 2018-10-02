@@ -8,7 +8,7 @@ import java.util.List;
 import junit.framework.Assert;
 import org.junit.Test;
 import ro.micsa.exchange.dto.ExchangeRate;
-import ro.micsa.exchange.retrievers.BRDDataRetriver;
+import ro.micsa.exchange.retrievers.BRDDataRetriever;
 
 /**
  *
@@ -18,7 +18,7 @@ public class TestBRDRetriever {
     
     @Test
     public void testRetrieve() throws Exception {
-        BRDDataRetriver brdDataRetriever = new BRDDataRetriver();
+        BRDDataRetriever brdDataRetriever = new BRDDataRetriever();
         Assert.assertTrue(brdDataRetriever.getBankName().equals("BRD"));
         
         List<ExchangeRate> retrieved = brdDataRetriever.getExchangeRates();        
