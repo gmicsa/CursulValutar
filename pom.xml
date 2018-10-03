@@ -11,9 +11,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.3.19.RELEASE</spring.version>
-        <jersey.version>2.27</jersey.version>
+        <jersey.version>1.11</jersey.version>
         <appengine.sdk.version>1.9.64</appengine.sdk.version>
-        <datanucleus.jpa.version>3.2.11</datanucleus.jpa.version>
+        <datanucleus.jpa.version>3.1.1</datanucleus.jpa.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-api-jpa</artifactId>
-            <version>3.3.7</version>
+            <version>${datanucleus.jpa.version}</version>
         </dependency>
 
         <dependency>
@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.google.appengine.orm</groupId>
             <artifactId>datanucleus-appengine</artifactId>
-            <version>3.0.0-20140128</version>
+            <version>2.1.1</version>
 
             <exclusions>
                 <exclusion>
@@ -156,14 +156,14 @@
 
         <!-- Jersey -->
         <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
+            <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
             <version>${jersey.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
             <version>${jersey.version}</version>
             <exclusions>
                 <exclusion>
@@ -259,8 +259,8 @@
             </plugin>
             <plugin>
                 <groupId>org.datanucleus</groupId>
-                <artifactId>datanucleus-maven-plugin</artifactId>
-                <version>3.3.2</version>
+                <artifactId>maven-datanucleus-plugin</artifactId>
+                <version>${datanucleus.jpa.version}</version>
 
                 <configuration>
                     <api>JPA</api>
@@ -269,6 +269,14 @@
                     <verbose>true</verbose>
                     <fork>false</fork>
                 </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.datanucleus</groupId>
+                        <artifactId>datanucleus-core</artifactId>
+                        <version>${datanucleus.jpa.version}</version>
+                    </dependency>
+                </dependencies>
 
                 <executions>
                     <execution>
@@ -310,40 +318,40 @@
             </plugin>
 
             <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>exec-maven-plugin</artifactId>-->
-                <!--<version>1.5.0</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>exec-npm-install</id>-->
-                        <!--<phase>generate-sources</phase>-->
-                        <!--<configuration>-->
-                            <!--<workingDirectory>${project.basedir}/src/main/webapp</workingDirectory>-->
-                            <!--<executable>npm.cmd</executable>-->
-                            <!--<arguments>-->
-                                <!--<argument>install</argument>-->
-                            <!--</arguments>-->
-                        <!--</configuration>-->
-                        <!--<goals>-->
-                            <!--<goal>exec</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                    <!--<execution>-->
-                        <!--<id>exec-npm-run-tsc</id>-->
-                        <!--<phase>generate-sources</phase>-->
-                        <!--<configuration>-->
-                            <!--<workingDirectory>src/main/webapp/v2/exchangeservice</workingDirectory>-->
-                            <!--<executable>npm.cmd</executable>-->
-                            <!--<arguments>-->
-                                <!--<argument>run</argument>-->
-                                <!--<argument>tsc</argument>-->
-                            <!--</arguments>-->
-                        <!--</configuration>-->
-                        <!--<goals>-->
-                            <!--<goal>exec</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>exec-maven-plugin</artifactId>-->
+            <!--<version>1.5.0</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>exec-npm-install</id>-->
+            <!--<phase>generate-sources</phase>-->
+            <!--<configuration>-->
+            <!--<workingDirectory>${project.basedir}/src/main/webapp</workingDirectory>-->
+            <!--<executable>npm.cmd</executable>-->
+            <!--<arguments>-->
+            <!--<argument>install</argument>-->
+            <!--</arguments>-->
+            <!--</configuration>-->
+            <!--<goals>-->
+            <!--<goal>exec</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--<execution>-->
+            <!--<id>exec-npm-run-tsc</id>-->
+            <!--<phase>generate-sources</phase>-->
+            <!--<configuration>-->
+            <!--<workingDirectory>src/main/webapp/v2/exchangeservice</workingDirectory>-->
+            <!--<executable>npm.cmd</executable>-->
+            <!--<arguments>-->
+            <!--<argument>run</argument>-->
+            <!--<argument>tsc</argument>-->
+            <!--</arguments>-->
+            <!--</configuration>-->
+            <!--<goals>-->
+            <!--<goal>exec</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
             <!--</plugin>-->
 
         </plugins>
